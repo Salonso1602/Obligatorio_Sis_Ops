@@ -2,7 +2,7 @@
 
 ## Primera Entrega
 
-# En esta primera entrega, se deberá realizar lo siguiente:
+En esta primera entrega, se deberá realizar lo siguiente:
 
 	Instalación de una máquina virtual (tipo 2) con algún sistema operativo Linux server. Algunos de los sistemas operativos Linux server libres son: Ubuntu, Debian, CentosOS. 
 	Crear un grupo llamado SO.
