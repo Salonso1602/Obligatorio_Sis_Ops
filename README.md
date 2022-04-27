@@ -23,6 +23,7 @@ Deberás tener en cuenta los siguientes requisitos:
 * Para el caso en que ya exista el directorio dentro de /backup, se deberá preguntar si se desea eliminar el backup existente. 
 
 *Top*
+
 Al inicio del sistema, se debe ejecutar un script cada 1 minuto que saque estadísticas del sistema y de cada proceso (automático). Consumo de CPU, memoria y demás información.
 La salida debe ser almacenada dentro del directorio /Estadisticas
 
