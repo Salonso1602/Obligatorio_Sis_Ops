@@ -9,5 +9,12 @@ package salonso1602.obligatorio2_equipo3;
  * @author Néstor
  */
 public class CPU {
+    private Proceso procesoCargado;
     
+    public CPU(Proceso procesoACargar)
+    {
+        this.procesoCargado = procesoACargar;
+    }
+    
+    //public void ejecutarProceso()
 }

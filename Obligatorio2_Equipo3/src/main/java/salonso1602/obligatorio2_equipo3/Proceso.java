@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package salonso1602.obligatorio2_equipo3;
-
+import java.util.*;
 /**
  *
  * @author gatom
@@ -15,32 +15,43 @@ public class Proceso {
         Finalizado
     }
     private Estados estadoActual;
-    
+    private static int NivelesPrioridad = 50;
+    private String tipoProceso;
     private int prioridad;
     private int tiempoEjecucion;
     private int tiempoEjecutado;
     private int periodoInterrupcionES;
     private int largoInterrupcionES;
+    private int tiempoBloqueado;
     private String id;
     
-    public Proceso(String nombreProceso, int Prioridad, int tiempoDeCPU, int periodoIntES, int largoIntEs){
+    public Proceso(String nombreProceso, int Prioridad, int tiempoDeCPU, int periodoIntES, int largoIntEs, String tipo){
         id = nombreProceso;
         prioridad = Prioridad;
         tiempoEjecucion = tiempoDeCPU;
         periodoInterrupcionES = periodoIntES;
         largoInterrupcionES = largoIntEs;
         tiempoEjecutado = 0;
+        tiempoBloqueado = 0;
+        tipoProceso = tipo;
         estadoActual = Estados.Listo;
     }
     
     public Estados getEstadoActual(){
-        if(tiempoEjecutado > tiempoEjecucion){
+        if(tiempoEjecutado >= tiempoEjecucion){
             this.estadoActual = Estados.Finalizado;
             return estadoActual;
-        } else if(tiempoEjecutado % periodoInterrupcionES == 0){
+        }
+        else if (tiempoBloqueado == largoInterrupcionES){
+            this.estadoActual = Estados.Listo;
+            return estadoActual;
+        }
+        else if(tiempoEjecutado % periodoInterrupcionES == 0){
             this.estadoActual = Estados.Bloqueado;
             return estadoActual;
-        } else{
+        }
+        else
+        {
             this.estadoActual = Estados.Listo;
             return estadoActual;
         }
@@ -58,6 +69,9 @@ public class Proceso {
     public void setTiempoEjecutado(int tiempoNuevo){
         this.tiempoEjecutado = tiempoNuevo;
     }
+    public void addTiempoEjecutado(int tiempoNuevo){
+        this.tiempoEjecutado += tiempoNuevo;
+    }
     public void setPeriodoES(int tiempoNuevo){
         this.periodoInterrupcionES = tiempoNuevo;
     }
@@ -66,5 +80,24 @@ public class Proceso {
     }
     public void setID(String nombreNuevo){
         this.id = nombreNuevo;
+    }
+    
+    public int getPrioridad(){
+        return this.prioridad;
+    }
+    public int getTiempoEjecucion(){
+        return this.tiempoEjecucion;
+    }
+    public int setTiempoEjecutado(){
+        return this.tiempoEjecutado;
+    }
+    public int getPeriodoES(){
+        return this.periodoInterrupcionES;
+    }
+    public int getLargoES(){
+        return this.largoInterrupcionES;
+    }
+    public String setID(){
+        return this.id;
     }
 }
