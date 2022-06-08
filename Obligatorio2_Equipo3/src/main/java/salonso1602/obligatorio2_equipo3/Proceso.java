@@ -45,6 +45,25 @@ public class Proceso {
             return estadoActual;
         }
     }
+
+    public int getPrioridad(){
+        return this.prioridad;
+    }
+    public int getTiempoEjecucion(){
+        return this.tiempoEjecucion;
+    }
+    public int getTiempoEjecutado(){
+        return this.tiempoEjecutado;
+    }
+    public int getPeriodoES(){
+        return this.periodoInterrupcionES;
+    }
+    public int getLargoES(int tiempoNuevo){
+        return this.largoInterrupcionES;
+    }
+    public void getID(String nombreNuevo){
+        this.id = nombreNuevo;
+    }
     
     public void setEstadoActual(Estados estado){
         this.estadoActual = estado;
@@ -57,6 +76,9 @@ public class Proceso {
     }
     public void setTiempoEjecutado(int tiempoNuevo){
         this.tiempoEjecutado = tiempoNuevo;
+    }
+    public void addTiempoEjecutado(int tiempoAgregado){
+        this.tiempoEjecutado += tiempoAgregado;
     }
     public void setPeriodoES(int tiempoNuevo){
         this.periodoInterrupcionES = tiempoNuevo;
