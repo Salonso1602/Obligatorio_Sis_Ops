@@ -12,11 +12,12 @@ public class Proceso {
     public static enum Estados{
         Listo,
         Bloqueado,
-        Finalizado
+        Finalizado,
+        Ejecucion,
+        BloqueadoUser
     }
     private Estados estadoActual;
     private static int NivelesPrioridad = 50;
-    private String tipoProceso;
     private int prioridad;
     private int tiempoEjecucion;
     private int tiempoEjecutado;
@@ -25,7 +26,7 @@ public class Proceso {
     private int tiempoBloqueado;
     private String id;
     
-    public Proceso(String nombreProceso, int Prioridad, int tiempoDeCPU, int periodoIntES, int largoIntEs, String tipo){
+    public Proceso(String nombreProceso, int Prioridad, int tiempoDeCPU, int periodoIntES, int largoIntEs){
         id = nombreProceso;
         prioridad = Prioridad;
         tiempoEjecucion = tiempoDeCPU;
@@ -33,8 +34,12 @@ public class Proceso {
         largoInterrupcionES = largoIntEs;
         tiempoEjecutado = 0;
         tiempoBloqueado = 0;
-        tipoProceso = tipo;
         estadoActual = Estados.Listo;
+    }
+    
+    public String getNombre()
+    {
+        return this.id;
     }
     
     public Estados getEstadoActual(){
@@ -99,5 +104,10 @@ public class Proceso {
     }
     public String setID(){
         return this.id;
+    }
+    
+    public void setNombre(String nombre)
+    {
+        this.id = nombre;
     }
 }
