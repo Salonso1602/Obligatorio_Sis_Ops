@@ -85,7 +85,10 @@ public class Proceso {
     public int getLargoES(){
         return this.largoInterrupcionES;
     }
-    public String getID(String nombreNuevo){
+    public int getTiempoEnES(){
+        return this.tiempoEnES;
+    }
+    public String getID(){
         return this.id;
     }
     
@@ -109,6 +112,12 @@ public class Proceso {
     }
     public void setLargoES(int tiempoNuevo){
         this.largoInterrupcionES = tiempoNuevo;
+    }
+    public void setTiempoEnES(int tiempoNuevo){
+        this.tiempoEnES = tiempoNuevo;
+    }
+    public void addTiempoEnES(int tiempoAgregar){
+        this.tiempoEnES += tiempoAgregar;
     }
     public void setID(String nombreNuevo){
         this.id = nombreNuevo;

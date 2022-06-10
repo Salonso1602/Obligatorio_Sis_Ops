@@ -11,26 +11,53 @@ import java.util.LinkedList;
  * @author Néstor
  */
 public class Planificador {
-    private LinkedList<Proceso> listaBloqueados = new LinkedList<>();
-    private LinkedList<Proceso> colaDeEjecutables = new LinkedList<>();
+    private final AdminProcBloqueados Bloqueados = AdminProcBloqueados.getInstance();
     private LinkedList<Proceso>[] listaListos = new LinkedList[99];
     private LinkedList<CPU> procesadoresExistentes = new LinkedList<>();
+    private int quantum;
+    
+    
+    public Planificador(int nroCPUs, int quantum){
+        this.quantum = quantum;
+        for(int i = 0; i < nroCPUs; i++){
+            procesadoresExistentes.add(new CPU());
+        }
+    }
+    
+    public void ejecutarRonda(){
+        pasarBloqueadosAListos();
+        pasarAEjecutables();
+        
+        for(CPU cpu : procesadoresExistentes){
+            cpu.ejecutarProceso(quantum);
+            Proceso procEnCPU = cpu.getProcesoEnCPU();
+            Proceso.Estados estadoProc = procEnCPU.getEstadoActual();
+            if (estadoProc != Proceso.Estados.Listo){
+                listaListos[procEnCPU.getPrioridad()-1].remove(procEnCPU);
+            }
+            if (estadoProc == Proceso.Estados.BloqueadoES
+                    || estadoProc == Proceso.Estados.Bloqueado){
+                Bloqueados.addBloqueado(procEnCPU);
+            }
+        }
+        
+        
+    }
     
     public void pasarBloqueadosAListos()
     {
-        for(Proceso proceso : listaBloqueados)
+        LinkedList<Proceso>[] desbloqueados = Bloqueados.getDesbloqueados(quantum);
+        int i = 0;
+        for(LinkedList<Proceso> procesos : desbloqueados)
         {
-            if(proceso.getEstadoActual().toString().equals("Listo"))
-            {
-                agregarProcesoAListos(proceso);
-                System.out.println("Pasé el proceso "+ proceso.getNombre()+" a listos.");
-            }
+            listaListos[i].addAll(procesos);
+            i++;
         }
     }
     
     public void agregarProcesoAListos(Proceso proceso)
     {
-        listaListos[proceso.getPrioridad()].add(proceso);
+        listaListos[proceso.getPrioridad()-1].add(proceso);
     }
     
     public void pasarAEjecutables()
@@ -47,7 +74,7 @@ public class Planificador {
         {
             return;
         }
-        for(int i = 0; i<=99;i++)
+        for(int i = 0; i < 99;i++)
         {
             for(Proceso proceso : listaListos[i])
             {
@@ -58,7 +85,6 @@ public class Planificador {
                 else
                 {
                     procesadoresUtilizables.get(procesadoresUtilizables.size()-1).setProcesoEnCPU(proceso);
-                    colaDeEjecutables.add(proceso);
                     System.out.println("Pasé "+proceso.getNombre()+"a CPU");
                     procesadoresUtilizables.remove(procesadoresUtilizables.size()-1);
                 }
