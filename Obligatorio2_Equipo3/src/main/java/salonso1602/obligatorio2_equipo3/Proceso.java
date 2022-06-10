@@ -32,7 +32,7 @@ public class Proceso {
         periodoInterrupcionES = periodoIntES;
         largoInterrupcionES = largoIntEs;
         tiempoEjecutado = 0;
-        tiempoBloqueado = 0;
+        tiempoEnES = 0;
         estadoActual = Estados.Listo;
     }
     
@@ -82,11 +82,11 @@ public class Proceso {
     public int getPeriodoES(){
         return this.periodoInterrupcionES;
     }
-    public int getLargoES(int tiempoNuevo){
+    public int getLargoES(){
         return this.largoInterrupcionES;
     }
-    public void getID(String nombreNuevo){
-        this.id = nombreNuevo;
+    public String getID(String nombreNuevo){
+        return this.id;
     }
     
     public void setEstadoActual(Estados estado){
@@ -112,29 +112,5 @@ public class Proceso {
     }
     public void setID(String nombreNuevo){
         this.id = nombreNuevo;
-    }
-    
-    public int getPrioridad(){
-        return this.prioridad;
-    }
-    public int getTiempoEjecucion(){
-        return this.tiempoEjecucion;
-    }
-    public int setTiempoEjecutado(){
-        return this.tiempoEjecutado;
-    }
-    public int getPeriodoES(){
-        return this.periodoInterrupcionES;
-    }
-    public int getLargoES(){
-        return this.largoInterrupcionES;
-    }
-    public String setID(){
-        return this.id;
-    }
-    
-    public void setNombre(String nombre)
-    {
-        this.id = nombre;
     }
 }

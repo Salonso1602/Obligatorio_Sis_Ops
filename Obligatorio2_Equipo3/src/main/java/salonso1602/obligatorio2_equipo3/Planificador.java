@@ -38,7 +38,7 @@ public class Planificador {
         LinkedList<CPU> procesadoresUtilizables = new LinkedList<>();
         for(CPU cpu : procesadoresExistentes)
         {
-            if(cpu.getProcesoCargado() != null)
+            if(cpu.getProcesoEnCPU()!= null)
             {
                 procesadoresUtilizables.add(cpu);
             }
@@ -57,7 +57,7 @@ public class Planificador {
                 }
                 else
                 {
-                    procesadoresUtilizables.get(procesadoresUtilizables.size()-1).setProcesoCargado(proceso);
+                    procesadoresUtilizables.get(procesadoresUtilizables.size()-1).setProcesoEnCPU(proceso);
                     colaDeEjecutables.add(proceso);
                     System.out.println("Pasé "+proceso.getNombre()+"a CPU");
                     procesadoresUtilizables.remove(procesadoresUtilizables.size()-1);
