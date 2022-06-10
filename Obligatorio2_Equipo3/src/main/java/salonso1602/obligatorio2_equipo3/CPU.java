@@ -10,20 +10,26 @@ package salonso1602.obligatorio2_equipo3;
  */
 public class CPU {
     private Proceso procesoCargado;
-    public CPU()
-    {
-        this.procesoCargado = null;
+    
+    public CPU(){
+        procesoCargado = null;
     }
     
-    public Proceso getProcesoCargado()
-    {
+    public void ejecutarProceso(int quantum){
+        if (this.procesoCargado != null){
+            for(int i = 0; i < quantum; i++){
+                procesoCargado.addTiempoEjecutado(1);
+                if (procesoCargado.getEstadoActual() != Proceso.Estados.Listo){
+                    return;
+                }
+            }
+        }
+    }
+    
+    public Proceso getProcesoEnCPU(){
         return this.procesoCargado;
     }
-    
-    public void setProcesoCargado(Proceso procesoACargar)
-    {
-        this.procesoCargado = procesoACargar;
+    public void setProcesoEnCPU(Proceso otroProceso){
+        this.procesoCargado = otroProceso;
     }
-    
-    //public void ejecutarProceso()
 }
