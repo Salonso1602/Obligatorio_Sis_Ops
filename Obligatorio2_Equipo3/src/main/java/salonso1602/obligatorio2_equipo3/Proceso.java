@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package salonso1602.obligatorio2_equipo3;
-
+import java.util.*;
 /**
  *
  * @author gatom
@@ -16,7 +16,7 @@ public class Proceso {
         Finalizado
     }
     private Estados estadoActual;
-    
+    private static int NivelesPrioridad = 50;
     private int prioridad;
     private int tiempoEjecucion;
     private int tiempoEjecutado;
@@ -32,7 +32,13 @@ public class Proceso {
         periodoInterrupcionES = periodoIntES;
         largoInterrupcionES = largoIntEs;
         tiempoEjecutado = 0;
+        tiempoBloqueado = 0;
         estadoActual = Estados.Listo;
+    }
+    
+    public String getNombre()
+    {
+        return this.id;
     }
     
     public Estados getEstadoActual(){
@@ -106,5 +112,29 @@ public class Proceso {
     }
     public void setID(String nombreNuevo){
         this.id = nombreNuevo;
+    }
+    
+    public int getPrioridad(){
+        return this.prioridad;
+    }
+    public int getTiempoEjecucion(){
+        return this.tiempoEjecucion;
+    }
+    public int setTiempoEjecutado(){
+        return this.tiempoEjecutado;
+    }
+    public int getPeriodoES(){
+        return this.periodoInterrupcionES;
+    }
+    public int getLargoES(){
+        return this.largoInterrupcionES;
+    }
+    public String setID(){
+        return this.id;
+    }
+    
+    public void setNombre(String nombre)
+    {
+        this.id = nombre;
     }
 }

@@ -12,6 +12,7 @@ package salonso1602.obligatorio2_equipo3;
 public class Obligatorio2_Equipo3 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        SingletonPlanificador.getInstance(new Planificador());
+        SingletonPlanificador.getInstance(new Planificador()).value.pasarAEjecutables();
     }
 }
