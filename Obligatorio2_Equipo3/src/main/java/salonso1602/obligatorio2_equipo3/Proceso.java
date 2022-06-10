@@ -12,6 +12,7 @@ public class Proceso {
     public static enum Estados{
         Listo,
         Bloqueado,
+        BloqueadoES,
         Finalizado
     }
     private Estados estadoActual;
@@ -21,6 +22,7 @@ public class Proceso {
     private int tiempoEjecutado;
     private int periodoInterrupcionES;
     private int largoInterrupcionES;
+    private int tiempoEnES;
     private String id;
     
     public Proceso(String nombreProceso, int Prioridad, int tiempoDeCPU, int periodoIntES, int largoIntEs){
@@ -34,18 +36,34 @@ public class Proceso {
     }
     
     public Estados getEstadoActual(){
-        if(tiempoEjecutado > tiempoEjecucion){
+        if (estadoActual == Estados.Bloqueado){
+            return estadoActual;
+        }
+        if(tiempoEjecutado >= tiempoEjecucion){
             this.estadoActual = Estados.Finalizado;
             return estadoActual;
         } else if(tiempoEjecutado % periodoInterrupcionES == 0){
-            this.estadoActual = Estados.Bloqueado;
+            this.estadoActual = Estados.BloqueadoES;
             return estadoActual;
-        } else{
+        }else if(tiempoEnES >= largoInterrupcionES){
+            this.estadoActual = Estados.Listo;
+            tiempoEnES = 0;
+            return estadoActual;
+        }
+        else{
             this.estadoActual = Estados.Listo;
             return estadoActual;
         }
     }
 
+    public void BloquearProceso(){
+        this.estadoActual = Estados.Bloqueado;
+    }
+    public Estados DesbloquearProceso(){
+        this.estadoActual = Estados.Listo;
+        return getEstadoActual();
+    }
+    
     public int getPrioridad(){
         return this.prioridad;
     }
