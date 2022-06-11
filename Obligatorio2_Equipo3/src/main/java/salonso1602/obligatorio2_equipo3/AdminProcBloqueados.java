@@ -36,6 +36,10 @@ public class AdminProcBloqueados {
         //primero actualizo los bloqueados con el tiempo que paso en el ultimo
         //ciclo (un quantum), si se desbloquean los saco aparte
         LinkedList<Proceso>[] result = new LinkedList[99];
+        for (int i = 0; i < 99; i++){
+            result[i] = new LinkedList<>();
+        }
+        
         LinkedList<Proceso> aux = new LinkedList<>();
         for (int t = 0; t < quantumPasado; t++){
             for (Proceso proc : procesosBloqueados){
@@ -57,6 +61,9 @@ public class AdminProcBloqueados {
         for (Proceso proc : procesosBloqueados){
             result += proc.getID() + ":" + proc.getEstadoActual().toString() + ", ";
         }
-        return result.substring(0, result.length()-2);
+        if(result.length() > 3){
+            return result.substring(0, result.length()-2);
+        }
+        return "";
     }
 }

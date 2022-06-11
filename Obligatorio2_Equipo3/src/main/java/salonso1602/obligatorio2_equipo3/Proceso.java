@@ -48,7 +48,7 @@ public class Proceso {
         if(tiempoEjecutado >= tiempoEjecucion){
             this.estadoActual = Estados.Finalizado;
             return estadoActual;
-        } else if(tiempoEjecutado % periodoInterrupcionES == 0){
+        } else if(periodoInterrupcionES > 0 && tiempoEjecutado % periodoInterrupcionES == 0 && estadoActual == Estados.Listo){
             this.estadoActual = Estados.BloqueadoES;
             return estadoActual;
         }else if(tiempoEnES >= largoInterrupcionES){

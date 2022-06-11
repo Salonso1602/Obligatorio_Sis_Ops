@@ -22,6 +22,9 @@ public class Planificador {
         for(int i = 0; i < nroCPUs; i++){
             procesadoresExistentes.add(new CPU());
         }
+        for (int i = 0; i < 99; i++){
+            listaListos[i] = new LinkedList<>();
+        }
     }
     
     public void ejecutarRonda(){
@@ -29,15 +32,18 @@ public class Planificador {
         pasarAEjecutables();
         
         for(CPU cpu : procesadoresExistentes){
-            cpu.ejecutarProceso(quantum);
             Proceso procEnCPU = cpu.getProcesoEnCPU();
-            Proceso.Estados estadoProc = procEnCPU.getEstadoActual();
-            if (estadoProc != Proceso.Estados.Listo){
-                listaListos[procEnCPU.getPrioridad()-1].remove(procEnCPU);
-            }
-            if (estadoProc == Proceso.Estados.BloqueadoES
-                    || estadoProc == Proceso.Estados.Bloqueado){
-                Bloqueados.addBloqueado(procEnCPU);
+            cpu.ejecutarProceso(quantum);
+            if (procEnCPU != null) {
+                Proceso.Estados estadoProc = procEnCPU.getEstadoActual();
+                if (estadoProc != Proceso.Estados.Listo) {
+                    listaListos[procEnCPU.getPrioridad() - 1].remove(procEnCPU);
+                }
+                if (estadoProc == Proceso.Estados.BloqueadoES
+                        || estadoProc == Proceso.Estados.Bloqueado) {
+                    Bloqueados.addBloqueado(procEnCPU);
+                    System.out.println("Pase "+procEnCPU.getID()+" a BLOCK");
+                }
             }
         }
         
@@ -65,7 +71,7 @@ public class Planificador {
         LinkedList<CPU> procesadoresUtilizables = new LinkedList<>();
         for(CPU cpu : procesadoresExistentes)
         {
-            if(cpu.getProcesoEnCPU()!= null)
+            if(cpu.getProcesoEnCPU()== null)
             {
                 procesadoresUtilizables.add(cpu);
             }
@@ -85,10 +91,13 @@ public class Planificador {
                 else
                 {
                     procesadoresUtilizables.get(procesadoresUtilizables.size()-1).setProcesoEnCPU(proceso);
-                    System.out.println("Pasé "+proceso.getNombre()+"a CPU");
+                    System.out.println("Pase "+proceso.getID()+" a CPU");
                     procesadoresUtilizables.remove(procesadoresUtilizables.size()-1);
                 }
             }
         }
+    }
+    public void printBloqueados(){
+        System.out.println(this.Bloqueados.printListaConMotivo());
     }
 }

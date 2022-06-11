@@ -24,4 +24,7 @@ public final class SingletonPlanificador {
         return instance;
     }
     
+    public Planificador getPlanner(){
+        return this.value;
+    }
 }
