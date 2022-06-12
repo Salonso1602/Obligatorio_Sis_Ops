@@ -19,7 +19,7 @@ public class CPU {
         if (this.procesoCargado != null){
             for(int i = 0; i < quantum; i++){
                 procesoCargado.addTiempoEjecutado(1);
-                if (procesoCargado.getEstadoActual() != Proceso.Estados.Listo){
+                if (procesoCargado.updateEstadoActual() != Proceso.Estados.Listo){
                     this.procesoCargado = null;
                     return;
                 }

@@ -41,25 +41,30 @@ public class Proceso {
         return this.id;
     }
     
-    public Estados getEstadoActual(){
+    public Estados updateEstadoActual(){
         if (estadoActual == Estados.Bloqueado){
             return estadoActual;
         }
         if(tiempoEjecutado >= tiempoEjecucion){
             this.estadoActual = Estados.Finalizado;
+            System.out.println(this.id + " Termine!");
             return estadoActual;
         } else if(periodoInterrupcionES > 0 && tiempoEjecutado % periodoInterrupcionES == 0 && estadoActual == Estados.Listo){
             this.estadoActual = Estados.BloqueadoES;
             return estadoActual;
-        }else if(tiempoEnES >= largoInterrupcionES){
+        }else if(tiempoEnES >= largoInterrupcionES && estadoActual == Estados.BloqueadoES){
             this.estadoActual = Estados.Listo;
             tiempoEnES = 0;
             return estadoActual;
         }
         else{
-            this.estadoActual = Estados.Listo;
+            
             return estadoActual;
         }
+    }
+    
+    public Estados getEstadoActual(){
+            return estadoActual;
     }
 
     public void BloquearProceso(){

@@ -28,8 +28,8 @@ public class Planificador {
     }
     
     public void ejecutarRonda(){
-        pasarBloqueadosAListos();
         pasarAEjecutables();
+        pasarBloqueadosAListos();
         
         for(CPU cpu : procesadoresExistentes){
             Proceso procEnCPU = cpu.getProcesoEnCPU();

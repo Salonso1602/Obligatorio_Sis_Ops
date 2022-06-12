@@ -43,10 +43,12 @@ public class AdminProcBloqueados {
         LinkedList<Proceso> aux = new LinkedList<>();
         for (int t = 0; t < quantumPasado; t++){
             for (Proceso proc : procesosBloqueados){
-                proc.addTiempoEnES(1);
-                if (proc.getEstadoActual() != Proceso.Estados.BloqueadoES){
-                    result[proc.getPrioridad()-1].add(proc);
-                    aux.add(proc);
+                if (proc.getEstadoActual() == Proceso.Estados.BloqueadoES){
+                    proc.addTiempoEnES(1);
+                    if (proc.updateEstadoActual() != Proceso.Estados.BloqueadoES){
+                        result[proc.getPrioridad()-1].add(proc);
+                        aux.add(proc);
+                    }
                 }
             }
         }
