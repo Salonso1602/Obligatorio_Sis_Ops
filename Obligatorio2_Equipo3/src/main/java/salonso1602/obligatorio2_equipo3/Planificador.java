@@ -97,7 +97,16 @@ public class Planificador {
             }
         }
     }
-    public void printBloqueados(){
-        System.out.println(this.Bloqueados.printListaConMotivo());
+    public String printBloqueados(){
+        return (this.Bloqueados.printListaConMotivo());
     }
+    public String printListos(){
+        StringBuilder sb = new StringBuilder();
+        for (LinkedList<Proceso> lista : listaListos){
+            for (Proceso proc : lista){
+                sb.append(proc.getID() + ", ");
+            }
+        }
+        return sb.toString();
+    } 
 }
