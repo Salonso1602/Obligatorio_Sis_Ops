@@ -36,8 +36,15 @@ public class Planificador {
             logger.append("------------\n");
             logger.append("Ronda "+numRonda+":\n");
             pasarAEjecutables();
-            pasarBloqueadosAListos();
-
+            LinkedList<Proceso>[] nuevosProcs = pasarBloqueadosAListos();
+            for (LinkedList<Proceso> cola : nuevosProcs){
+                if (!cola.isEmpty()){
+                for (Proceso proc : cola){
+                    logger.append(proc.getID() + " se desbloqueó\n");
+                }
+                }
+            }
+            
             for (CPU cpu : procesadoresExistentes) {
                 Proceso procEnCPU = cpu.getProcesoEnCPU();
                 cpu.ejecutarProceso(quantum);
@@ -62,7 +69,7 @@ public class Planificador {
         }
     }
     
-    public void pasarBloqueadosAListos()
+    public LinkedList<Proceso>[] pasarBloqueadosAListos()
     {
         LinkedList<Proceso>[] desbloqueados = Bloqueados.getDesbloqueados(quantum);
         int i = 0;
@@ -71,6 +78,7 @@ public class Planificador {
             listaListos[i].addAll(procesos);
             i++;
         }
+        return desbloqueados;
     }
     
     public void agregarProcesoAListos(Proceso proceso)
