@@ -21,13 +21,7 @@ public class Obligatorio2_Equipo3 {
         planner.agregarProcesoAListos(p2);
         planner.agregarProcesoAListos(p3);
         
-        int i = 0;
-        while (i < 4){
-            System.out.println("Ronda" + i);
-            planner.ejecutarRonda();
-            planner.printBloqueados();
-            System.out.println("-----------");
-            i++;
-        }
+        planner.ejecutarRonda(4);
+        System.out.println(planner.getLog());
     }
 }

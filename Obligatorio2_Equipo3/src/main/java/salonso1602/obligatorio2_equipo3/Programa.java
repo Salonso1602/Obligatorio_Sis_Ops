@@ -15,24 +15,27 @@ import javax.swing.event.ListSelectionListener;
  * @author Néstor
  */
 public class Programa extends javax.swing.JFrame {
-    
+
     private static int nroCPUs;
     private static int quantum;
     private static Planificador planificador;
+
     /**
      * Creates new form Ejecutable
+     *
      * @param NumCPUS
      * @param Quantum
      */
     public Programa(int NumCPUS, int Quantum) {
         quantum = Quantum;
         nroCPUs = NumCPUS;
-        planificador = new Planificador(nroCPUs,quantum);
+        planificador = new Planificador(nroCPUs, quantum);
         initComponents();
         //Display_Todo.setVisible(false);
-        
+
     }
     public static int id = 0;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,7 +69,6 @@ public class Programa extends javax.swing.JFrame {
         GrupoBotonesSOoUser = new javax.swing.ButtonGroup();
         Display_Frame = new javax.swing.JFrame();
         Volver_Display = new javax.swing.JButton();
-        botStop = new javax.swing.JButton();
         botStart = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaColas = new javax.swing.JList<>();
@@ -78,11 +80,17 @@ public class Programa extends javax.swing.JFrame {
         getFullCola = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         dispProcCPU = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        cantQuantums = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtLog = new javax.swing.JTextArea();
         Agregar_Proceso = new javax.swing.JButton();
         Bloquear_Proceso = new javax.swing.JButton();
         Modificar_Proceso = new javax.swing.JButton();
         Display_Todo = new javax.swing.JButton();
 
+        Agregar_Frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Agregar_Frame.setTitle("Agregar Proceso");
         Agregar_Frame.setName("Agregar_Frame"); // NOI18N
         Agregar_Frame.setPreferredSize(new java.awt.Dimension(600, 400));
@@ -198,6 +206,7 @@ public class Programa extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
+        Bloquear_Frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Bloquear_Frame.setTitle("Bloquear Proceso");
         Bloquear_Frame.setName("Bloquear_Frame"); // NOI18N
         Bloquear_Frame.setSize(new java.awt.Dimension(400, 300));
@@ -227,6 +236,7 @@ public class Programa extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
+        Modificar_Frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Modificar_Frame.setTitle("Modificar Proceso");
         Modificar_Frame.setName("Modificar_Frame"); // NOI18N
         Modificar_Frame.setSize(new java.awt.Dimension(400, 300));
@@ -256,9 +266,16 @@ public class Programa extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
+        Display_Frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Display_Frame.setTitle("Display de Procesos");
-        Display_Frame.setName("Bloquear_Frame"); // NOI18N
-        Display_Frame.setSize(new java.awt.Dimension(400, 300));
+        Display_Frame.setName("Display_Frame"); // NOI18N
+        Display_Frame.setPreferredSize(new java.awt.Dimension(716, 400));
+        Display_Frame.setSize(Display_Frame.getPreferredSize());
+        Display_Frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                Display_FrameWindowClosed(evt);
+            }
+        });
 
         Volver_Display.setText("Volver");
         Volver_Display.setActionCommand("");
@@ -268,9 +285,12 @@ public class Programa extends javax.swing.JFrame {
             }
         });
 
-        botStop.setText("Pausar");
-
         botStart.setText("Iniciar");
+        botStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botStartActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(listaColas);
 
@@ -296,22 +316,51 @@ public class Programa extends javax.swing.JFrame {
 
         jLabel3.setText("Proceso en CPU/s");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Ejecutador de Rondas de Planificador");
+
+        jLabel5.setText("Rondas a Ejecutar (cant de quantums):");
+
+        cantQuantums.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cantQuantumsActionPerformed(evt);
+            }
+        });
+
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        txtLog.setEditable(false);
+        txtLog.setColumns(20);
+        txtLog.setRows(5);
+        jScrollPane3.setViewportView(txtLog);
+
         javax.swing.GroupLayout Display_FrameLayout = new javax.swing.GroupLayout(Display_Frame.getContentPane());
         Display_Frame.getContentPane().setLayout(Display_FrameLayout);
         Display_FrameLayout.setHorizontalGroup(
             Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Display_FrameLayout.createSequentialGroup()
-                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Display_FrameLayout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(Volver_Display)
+                        .addGap(71, 71, 71))
                     .addGroup(Display_FrameLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Display_FrameLayout.createSequentialGroup()
+                        .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dispProcCPU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(Display_FrameLayout.createSequentialGroup()
                                 .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addGroup(Display_FrameLayout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(27, 27, 27)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Display_FrameLayout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Display_FrameLayout.createSequentialGroup()
+                                        .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addGroup(Display_FrameLayout.createSequentialGroup()
+                                                .addGap(19, 19, 19)
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(27, 27, 27)))
                                 .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addComponent(jLabel2))
@@ -320,18 +369,16 @@ public class Programa extends javax.swing.JFrame {
                                     .addComponent(getFullCola)
                                     .addGroup(Display_FrameLayout.createSequentialGroup()
                                         .addGap(11, 11, 11)
-                                        .addComponent(getProcData))))
-                            .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(dispProcCPU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(Display_FrameLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(botStop)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botStart)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Volver_Display)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                                        .addComponent(getProcData)))))
+                        .addGap(53, 53, 53)))
+                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cantQuantums, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(botStart, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38))
         );
         Display_FrameLayout.setVerticalGroup(
             Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,27 +386,36 @@ public class Programa extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Display_FrameLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel5)
+                        .addGap(12, 12, 12)
+                        .addComponent(cantQuantums, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(botStart)
+                        .addGap(16, 16, 16)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(Display_FrameLayout.createSequentialGroup()
                         .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3))
-                    .addGroup(Display_FrameLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(getProcData)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(getFullCola)
-                        .addGap(46, 46, 46)))
-                .addComponent(dispProcCPU, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botStop)
-                    .addComponent(botStart)
-                    .addComponent(Volver_Display))
+                            .addGroup(Display_FrameLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(getProcData)
+                                .addGap(32, 32, 32)
+                                .addComponent(getFullCola))
+                            .addGroup(Display_FrameLayout.createSequentialGroup()
+                                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3)))
+                        .addGap(18, 18, 18)
+                        .addComponent(dispProcCPU, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Volver_Display)
                 .addGap(14, 14, 14))
         );
 
@@ -411,7 +467,7 @@ public class Programa extends javax.swing.JFrame {
                     .addComponent(Modificar_Proceso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Agregar_Proceso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Bloquear_Proceso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -424,7 +480,7 @@ public class Programa extends javax.swing.JFrame {
                 .addComponent(Modificar_Proceso)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Display_Todo)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -461,24 +517,17 @@ public class Programa extends javax.swing.JFrame {
     }//GEN-LAST:event_Volver_ModificarActionPerformed
 
     private void Crear_ProcesosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Crear_ProcesosActionPerformed
-        if(Integer.parseInt(Cant_Procesos_Creados.getText())<=0)
-        {
+        if (Integer.parseInt(Cant_Procesos_Creados.getText()) <= 0) {
             JOptionPane.showMessageDialog(null, "La cantidad de procesos a crearse debe ser mayor o igual a 1", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else
-        {
-            for(int i = 0; i <= Integer.parseInt(Cant_Procesos_Creados.getText()); i++)
-            {
+        } else {
+            for (int i = 0; i < Integer.parseInt(Cant_Procesos_Creados.getText()); i++) {
                 boolean SO;
-                if(GrupoBotonesSOoUser.isSelected(Es_SO.getModel()))
-                {
+                if (GrupoBotonesSOoUser.isSelected(Es_SO.getModel())) {
                     SO = true;
+                } else {
+                    SO = false;
                 }
-                else
-                {
-                   SO = false;
-                }
-                Proceso nuevoProceso = new Proceso(Nombre_Proceso.getText(),Integer.parseInt(Prioridad_Proceso.getText()),Integer.parseInt(Tiempo_Ejecucion.getText()),Integer.parseInt(Periodo_ES.getText()),Integer.parseInt(Tiempo_Dentro_ES.getText()),String.valueOf(id),SO);
+                Proceso nuevoProceso = new Proceso(Nombre_Proceso.getText(), Integer.parseInt(Prioridad_Proceso.getText()), Integer.parseInt(Tiempo_Ejecucion.getText()), Integer.parseInt(Periodo_ES.getText()), Integer.parseInt(Tiempo_Dentro_ES.getText()), String.valueOf(id), SO);
                 id++;
                 planificador.agregarProcesoAListos(nuevoProceso);
             }
@@ -489,16 +538,18 @@ public class Programa extends javax.swing.JFrame {
     private void Display_TodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Display_TodoActionPerformed
         this.setVisible(false);
         Display_Frame.setVisible(true);
-        
+
         listaColas.setModel(new DefaultComboBoxModel<String>(planificador.printListaPrioridades()));
-        
+
         listaColas.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()){
-                String selected = listaColas.getSelectedValue().toString();
-                
-                listaProcs.setModel(new DefaultComboBoxModel<String>(planificador.printProcEnCola(selected)));
+                if (!e.getValueIsAdjusting()) {
+                    if (listaColas.getSelectedValue() != null) {
+                        String selected = listaColas.getSelectedValue().toString();
+
+                        listaProcs.setModel(new DefaultComboBoxModel<String>(planificador.printProcEnCola(selected)));
+                    }
                 }
             }
         });
@@ -510,7 +561,7 @@ public class Programa extends javax.swing.JFrame {
     }//GEN-LAST:event_Volver_DisplayActionPerformed
 
     private void getProcDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getProcDataActionPerformed
-        if (listaProcs != null && listaColas != null){
+        if (listaProcs != null && listaColas != null) {
             String id = listaProcs.getSelectedValue().split(":")[1];
             Proceso proc = planificador.getProcEnCola(Integer.parseInt(listaColas.getSelectedValue()), id);
             JOptionPane.showMessageDialog(null, proc.getData(), proc.getNombre(), JOptionPane.INFORMATION_MESSAGE);
@@ -520,6 +571,22 @@ public class Programa extends javax.swing.JFrame {
     private void getFullColaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getFullColaActionPerformed
         JOptionPane.showMessageDialog(null, planificador.printListos(), "Cola", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_getFullColaActionPerformed
+
+    private void cantQuantumsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantQuantumsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cantQuantumsActionPerformed
+
+    private void botStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botStartActionPerformed
+        int repes = Integer.parseInt(cantQuantums.getText());
+        planificador.ejecutarRonda(repes);
+        dispProcCPU.setText(planificador.printProcsEnCPU());
+        
+        txtLog.setText(planificador.getLog());
+    }//GEN-LAST:event_botStartActionPerformed
+
+    private void Display_FrameWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_Display_FrameWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Display_FrameWindowClosed
 
     /**
      * @param args the command line arguments
@@ -552,7 +619,7 @@ public class Programa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Programa(nroCPUs,quantum).setVisible(true);
+                new Programa(nroCPUs, quantum).setVisible(true);
             }
         });
     }
@@ -587,16 +654,20 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JButton Volver_Display;
     private javax.swing.JButton Volver_Modificar;
     private javax.swing.JButton botStart;
-    private javax.swing.JButton botStop;
+    private javax.swing.JTextField cantQuantums;
     private javax.swing.JLabel dispProcCPU;
     private javax.swing.JButton getFullCola;
     private javax.swing.JButton getProcData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<String> listaColas;
     private javax.swing.JList<String> listaProcs;
+    private javax.swing.JTextArea txtLog;
     // End of variables declaration//GEN-END:variables
 }
