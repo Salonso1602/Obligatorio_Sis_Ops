@@ -13,9 +13,9 @@ public class Obligatorio2_Equipo3 {
 
     public static void main(String[] args) {
         Planificador planner = SingletonPlanificador.getInstance(new Planificador(1,3)).value;
-        Proceso p1 = new Proceso("p1", 1, 55, 5, 10);
-        Proceso p2 = new Proceso("p2", 8, 9, 6, 20);
-        Proceso p3 = new Proceso("p3", 77, 184, 0, 0);
+        Proceso p1 = new Proceso("p1", 1, 55, 5, 10,"p1",true);
+        Proceso p2 = new Proceso("p2", 50, 9, 6, 20,"p2",false);
+        Proceso p3 = new Proceso("p3", 77, 184, 0, 0,"p3",false);
         
         planner.agregarProcesoAListos(p1);
         planner.agregarProcesoAListos(p2);
