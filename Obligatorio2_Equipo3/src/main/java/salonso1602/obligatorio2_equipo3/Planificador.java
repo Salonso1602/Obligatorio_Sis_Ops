@@ -113,4 +113,34 @@ public class Planificador {
         }
         return sb.toString();
     } 
+    
+    public String[] printListaPrioridades(){
+        String[] arr = new String [99];
+        for (int i = 1; i < 100; i++){
+            arr[i-1] = ""+i;
+        }
+        return arr;
+    }
+    
+    public String[] printProcEnCola(String numCola){
+        int index = Integer.parseInt(numCola)-1;
+        String[] procs = new String[listaListos[index].size()];
+        int i = 0;
+        for (Proceso proc : listaListos[index]){
+            procs[i] = proc.getNombre() +":"+proc.getID();
+            i++;
+        }
+        return procs;
+    }
+    
+    public Proceso getProcEnCola(int prioridad, String id){
+        LinkedList<Proceso> lista = listaListos[prioridad-1];
+        Proceso[] procs = lista.toArray(new Proceso[0]);
+        for (Proceso proc : procs){
+            if(proc.getID().equals(id)){
+                return proc;
+            }
+        }
+        return null;
+    }
 }

@@ -4,7 +4,11 @@
  */
 package salonso1602.obligatorio2_equipo3;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -25,7 +29,7 @@ public class Programa extends javax.swing.JFrame {
         nroCPUs = NumCPUS;
         planificador = new Planificador(nroCPUs,quantum);
         initComponents();
-        Display_Todo.setVisible(false);
+        //Display_Todo.setVisible(false);
         
     }
     public static int id = 0;
@@ -60,6 +64,20 @@ public class Programa extends javax.swing.JFrame {
         Modificar_Frame = new javax.swing.JFrame();
         Volver_Modificar = new javax.swing.JButton();
         GrupoBotonesSOoUser = new javax.swing.ButtonGroup();
+        Display_Frame = new javax.swing.JFrame();
+        Volver_Display = new javax.swing.JButton();
+        botStop = new javax.swing.JButton();
+        botStart = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaColas = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaProcs = new javax.swing.JList<>();
+        getProcData = new javax.swing.JButton();
+        getFullCola = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        dispProcCPU = new javax.swing.JLabel();
         Agregar_Proceso = new javax.swing.JButton();
         Bloquear_Proceso = new javax.swing.JButton();
         Modificar_Proceso = new javax.swing.JButton();
@@ -238,6 +256,113 @@ public class Programa extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
+        Display_Frame.setTitle("Bloquear Proceso");
+        Display_Frame.setName("Bloquear_Frame"); // NOI18N
+        Display_Frame.setSize(new java.awt.Dimension(400, 300));
+
+        Volver_Display.setText("Volver");
+        Volver_Display.setActionCommand("");
+        Volver_Display.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Volver_DisplayActionPerformed(evt);
+            }
+        });
+
+        botStop.setText("Pausar");
+
+        botStart.setText("Iniciar");
+
+        jScrollPane1.setViewportView(listaColas);
+
+        jLabel1.setText("Colas de Prioridad");
+
+        jLabel2.setText("Procesos en Cola");
+
+        jScrollPane2.setViewportView(listaProcs);
+
+        getProcData.setText("Ver Datos");
+        getProcData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getProcDataActionPerformed(evt);
+            }
+        });
+
+        getFullCola.setText("Cola de Listos");
+        getFullCola.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getFullColaActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Proceso en CPU/s");
+
+        javax.swing.GroupLayout Display_FrameLayout = new javax.swing.GroupLayout(Display_Frame.getContentPane());
+        Display_Frame.getContentPane().setLayout(Display_FrameLayout);
+        Display_FrameLayout.setHorizontalGroup(
+            Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Display_FrameLayout.createSequentialGroup()
+                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(Display_FrameLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Display_FrameLayout.createSequentialGroup()
+                                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(Display_FrameLayout.createSequentialGroup()
+                                        .addGap(19, 19, 19)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(27, 27, 27)
+                                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(getFullCola)
+                                    .addGroup(Display_FrameLayout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addComponent(getProcData))))
+                            .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(dispProcCPU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(Display_FrameLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(botStop)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botStart)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Volver_Display)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        Display_FrameLayout.setVerticalGroup(
+            Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Display_FrameLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(Display_FrameLayout.createSequentialGroup()
+                        .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3))
+                    .addGroup(Display_FrameLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(getProcData)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(getFullCola)
+                        .addGap(46, 46, 46)))
+                .addComponent(dispProcCPU, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botStop)
+                    .addComponent(botStart)
+                    .addComponent(Volver_Display))
+                .addGap(14, 14, 14))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Obligatorio SO Equipo 6");
         setName("Ejecutable"); // NOI18N
@@ -269,6 +394,11 @@ public class Programa extends javax.swing.JFrame {
 
         Display_Todo.setText("Display");
         Display_Todo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Display_Todo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Display_TodoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -356,6 +486,41 @@ public class Programa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Crear_ProcesosActionPerformed
 
+    private void Display_TodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Display_TodoActionPerformed
+        this.setVisible(false);
+        Display_Frame.setVisible(true);
+        
+        listaColas.setModel(new DefaultComboBoxModel<String>(planificador.printListaPrioridades()));
+        
+        listaColas.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()){
+                String selected = listaColas.getSelectedValue().toString();
+                
+                listaProcs.setModel(new DefaultComboBoxModel<String>(planificador.printProcEnCola(selected)));
+                }
+            }
+        });
+    }//GEN-LAST:event_Display_TodoActionPerformed
+
+    private void Volver_DisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Volver_DisplayActionPerformed
+        this.setVisible(true);
+        Display_Frame.setVisible(false);
+    }//GEN-LAST:event_Volver_DisplayActionPerformed
+
+    private void getProcDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getProcDataActionPerformed
+        if (listaProcs != null && listaColas != null){
+            String id = listaProcs.getSelectedValue().split(":")[1];
+            Proceso proc = planificador.getProcEnCola(Integer.parseInt(listaColas.getSelectedValue()), id);
+            JOptionPane.showMessageDialog(null, proc.getData(), proc.getNombre(), JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_getProcDataActionPerformed
+
+    private void getFullColaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getFullColaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_getFullColaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -399,6 +564,7 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JButton Bloquear_Proceso;
     private javax.swing.JTextField Cant_Procesos_Creados;
     private javax.swing.JButton Crear_Procesos;
+    private javax.swing.JFrame Display_Frame;
     private javax.swing.JButton Display_Todo;
     private javax.swing.JRadioButton Es_SO;
     private javax.swing.JRadioButton Es_Usuario;
@@ -418,6 +584,19 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JTextField Tiempo_Ejecucion;
     private javax.swing.JButton Volver_Agregar;
     private javax.swing.JButton Volver_Bloquear;
+    private javax.swing.JButton Volver_Display;
     private javax.swing.JButton Volver_Modificar;
+    private javax.swing.JButton botStart;
+    private javax.swing.JButton botStop;
+    private javax.swing.JLabel dispProcCPU;
+    private javax.swing.JButton getFullCola;
+    private javax.swing.JButton getProcData;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> listaColas;
+    private javax.swing.JList<String> listaProcs;
     // End of variables declaration//GEN-END:variables
 }
