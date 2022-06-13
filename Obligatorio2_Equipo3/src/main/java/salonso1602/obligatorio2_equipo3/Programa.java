@@ -67,7 +67,8 @@ public class Programa extends javax.swing.JFrame {
 
         Agregar_Frame.setTitle("Agregar Proceso");
         Agregar_Frame.setName("Agregar_Frame"); // NOI18N
-        Agregar_Frame.setSize(new java.awt.Dimension(400, 300));
+        Agregar_Frame.setPreferredSize(new java.awt.Dimension(600, 400));
+        Agregar_Frame.setSize(new java.awt.Dimension(600, 400));
 
         Volver_Agregar.setText("Volver");
         Volver_Agregar.setActionCommand("");
@@ -112,7 +113,7 @@ public class Programa extends javax.swing.JFrame {
                 .addGroup(Agregar_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Agregar_FrameLayout.createSequentialGroup()
                         .addComponent(Label_Periodo_ES)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
                         .addComponent(Periodo_ES, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agregar_FrameLayout.createSequentialGroup()
                         .addGroup(Agregar_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +165,7 @@ public class Programa extends javax.swing.JFrame {
                 .addGroup(Agregar_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Label_Nombre_Proceso1)
                     .addComponent(Prioridad_Proceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(Es_SO)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Es_Usuario)
@@ -172,9 +173,9 @@ public class Programa extends javax.swing.JFrame {
                 .addGroup(Agregar_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Cant_Procesos_Creados, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Label_Procesos_Creados))
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(Crear_Procesos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Volver_Agregar)
                 .addGap(21, 21, 21))
         );
@@ -240,6 +241,7 @@ public class Programa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Obligatorio SO Equipo 6");
         setName("Ejecutable"); // NOI18N
+        setSize(new java.awt.Dimension(400, 300));
 
         Agregar_Proceso.setText("Agregar");
         Agregar_Proceso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
