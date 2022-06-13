@@ -23,22 +23,35 @@ public class Proceso {
     private int periodoInterrupcionES;
     private int largoInterrupcionES;
     private int tiempoEnES;
+    private String nombre;
+    private boolean UserOrSO; //SO = True, User = False
     private String id;
     
-    public Proceso(String nombreProceso, int Prioridad, int tiempoDeCPU, int periodoIntES, int largoIntEs){
-        id = nombreProceso;
-        prioridad = Prioridad;
+    public Proceso(String nombreProceso, int Prioridad, int tiempoDeCPU, int periodoIntES, int largoIntEs, String ID, boolean EsUserOEsSO){
+        nombre = nombreProceso;
+        if(EsUserOEsSO)
+        {
+           prioridad = Prioridad; 
+        }
+        else
+        {
+            if(Prioridad>49)
+            {
+                prioridad = Prioridad;
+            }
+            else
+            {
+               prioridad = Prioridad +50; 
+            }    
+        }
         tiempoEjecucion = tiempoDeCPU;
         periodoInterrupcionES = periodoIntES;
         largoInterrupcionES = largoIntEs;
         tiempoEjecutado = 0;
         tiempoEnES = 0;
         estadoActual = Estados.Listo;
-    }
-    
-    public String getNombre()
-    {
-        return this.id;
+        id = ID;
+        UserOrSO = EsUserOEsSO;
     }
     
     public Estados updateEstadoActual(){
@@ -93,7 +106,11 @@ public class Proceso {
     public int getTiempoEnES(){
         return this.tiempoEnES;
     }
-    public String getID(){
+    public String getNombre(){
+        return this.nombre;
+    }
+    public String getID()
+    {
         return this.id;
     }
     
@@ -124,7 +141,7 @@ public class Proceso {
     public void addTiempoEnES(int tiempoAgregar){
         this.tiempoEnES += tiempoAgregar;
     }
-    public void setID(String nombreNuevo){
-        this.id = nombreNuevo;
+    public void setNombre(String nombreNuevo){
+        this.nombre = nombreNuevo;
     }
 }

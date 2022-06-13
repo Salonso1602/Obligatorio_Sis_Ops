@@ -10,4 +10,26 @@
         <maven.compiler.target>18</maven.compiler.target>
         <exec.mainClass>salonso1602.obligatorio2_equipo3.Obligatorio2_Equipo3</exec.mainClass>
     </properties>
+    <packaging>jar</packaging>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>salonso1602.obligatorio2_equipo3.Setup</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
