@@ -14,7 +14,7 @@ public class Obligatorio2_Equipo3 {
     public static void main(String[] args) {
         Planificador planner = SingletonPlanificador.getInstance(new Planificador(1,3)).value;
         Proceso p1 = new Proceso("p1", 1, 55, 5, 10,"p1",true);
-        Proceso p2 = new Proceso("p2", 50, 9, 6, 20,"p2",false);
+        Proceso p2 = new Proceso("p2", 1, 9, 6, 20,"p2",true);
         Proceso p3 = new Proceso("p3", 77, 184, 0, 0,"p3",false);
         
         planner.agregarProcesoAListos(p1);
@@ -22,7 +22,7 @@ public class Obligatorio2_Equipo3 {
         planner.agregarProcesoAListos(p3);
         
         int i = 0;
-        while (i < 90){
+        while (i < 4){
             System.out.println("Ronda" + i);
             planner.ejecutarRonda();
             planner.printBloqueados();

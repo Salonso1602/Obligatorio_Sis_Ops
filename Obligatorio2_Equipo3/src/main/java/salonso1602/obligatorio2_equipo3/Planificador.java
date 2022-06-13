@@ -44,6 +44,10 @@ public class Planificador {
                     Bloqueados.addBloqueado(procEnCPU);
                     System.out.println("Pase "+procEnCPU.getID()+" a BLOCK");
                 }
+                if (estadoProc == Proceso.Estados.Listo) {
+                    listaListos[procEnCPU.getPrioridad() - 1].remove(procEnCPU);
+                    listaListos[procEnCPU.getPrioridad() - 1].addLast(procEnCPU);
+                }
             }
         }
         
