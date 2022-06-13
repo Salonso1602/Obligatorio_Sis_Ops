@@ -350,6 +350,7 @@ public class Programa extends javax.swing.JFrame {
                 id++;
                 planificador.agregarProcesoAListos(nuevoProceso);
             }
+            JOptionPane.showMessageDialog(null, "Se crearon los procesos con éxito", "Creación Exitosa", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_Crear_ProcesosActionPerformed
 
