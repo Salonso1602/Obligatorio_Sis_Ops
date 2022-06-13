@@ -108,7 +108,7 @@ public class Planificador {
         StringBuilder sb = new StringBuilder();
         for (LinkedList<Proceso> lista : listaListos){
             for (Proceso proc : lista){
-                sb.append(proc.getID() + ", ");
+                sb.append(proc.getNombre()+":"+proc.getID() + ", ");
             }
         }
         return sb.toString();

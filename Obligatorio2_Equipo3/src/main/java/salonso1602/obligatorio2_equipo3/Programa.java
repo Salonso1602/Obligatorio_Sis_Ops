@@ -256,7 +256,7 @@ public class Programa extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        Display_Frame.setTitle("Bloquear Proceso");
+        Display_Frame.setTitle("Display de Procesos");
         Display_Frame.setName("Bloquear_Frame"); // NOI18N
         Display_Frame.setSize(new java.awt.Dimension(400, 300));
 
@@ -518,7 +518,7 @@ public class Programa extends javax.swing.JFrame {
     }//GEN-LAST:event_getProcDataActionPerformed
 
     private void getFullColaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getFullColaActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, planificador.printListos(), "Cola", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_getFullColaActionPerformed
 
     /**

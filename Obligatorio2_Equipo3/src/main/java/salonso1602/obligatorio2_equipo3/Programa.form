@@ -274,7 +274,7 @@
     </Component>
     <Container class="javax.swing.JFrame" name="Display_Frame">
       <Properties>
-        <Property name="title" type="java.lang.String" value="Bloquear Proceso"/>
+        <Property name="title" type="java.lang.String" value="Display de Procesos"/>
         <Property name="name" type="java.lang.String" value="Bloquear_Frame" noResource="true"/>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[400, 300]"/>
