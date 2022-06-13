@@ -24,9 +24,7 @@ public class CPU {
             for(int i = 0; i < quantum; i++){
                 procesoCargado.addTiempoEjecutado(1);
                 if (procesoCargado.updateEstadoActual() != Proceso.Estados.Listo){
-                    if (procesoCargado.getEstadoActual() == Proceso.Estados.Finalizado){
                         procesoCargado = null;
-                    }
                     pideCambio = true;
                     return;
                 }

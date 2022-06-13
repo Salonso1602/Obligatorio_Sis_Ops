@@ -154,9 +154,11 @@ public class Planificador {
         for (CPU cpu : procesadoresExistentes){
             if(cpu.getProcesoEnCPU() != null){
                 res += "CPU "+ cpu.getID() +": "+ cpu.getProcesoEnCPU().getNombre()+":"+cpu.getProcesoEnCPU().getID() + " - ";
+            } else{
+                res += "CPU "+ cpu.getID() +": Vacío - ";
             }
         }
-        return res;
+        return res.substring(0,res.length()-2);
     }
     
     public Proceso getProcEnCola(int prioridad, String id){
