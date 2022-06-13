@@ -22,7 +22,7 @@ public class Planificador {
     public Planificador(int nroCPUs, int quantum){
         this.quantum = quantum;
         for(int i = 0; i < nroCPUs; i++){
-            procesadoresExistentes.add(new CPU());
+            procesadoresExistentes.add(new CPU(i));
         }
         for (int i = 0; i < 99; i++){
             listaListos[i] = new LinkedList<>();
@@ -49,7 +49,7 @@ public class Planificador {
                     if (estadoProc == Proceso.Estados.BloqueadoES
                             || estadoProc == Proceso.Estados.Bloqueado) {
                         Bloqueados.addBloqueado(procEnCPU);
-                        logger.append("Pase " + procEnCPU.getID() + " a BLOCK\n");
+                        logger.append(procEnCPU.getID() + " se bloqueó\n");
                     }
                     if (estadoProc == Proceso.Estados.Listo) {
                         listaListos[procEnCPU.getPrioridad() - 1].remove(procEnCPU);
@@ -92,6 +92,7 @@ public class Planificador {
         {
             return;
         }
+        int j = 0;
         for(int i = 0; i < 99;i++)
         {
             for(Proceso proceso : listaListos[i])
@@ -102,9 +103,11 @@ public class Planificador {
                 }
                 else
                 {
-                    procesadoresUtilizables.get(procesadoresUtilizables.size()-1).setProcesoEnCPU(proceso);
-                    logger.append("Pase "+proceso.getID()+" a CPU\n");
+                    CPU cpu = procesadoresUtilizables.get(procesadoresUtilizables.size()-1);
+                            cpu.setProcesoEnCPU(proceso);
+                    logger.append("Pase "+proceso.getID()+" a CPU"+cpu.getID()+"\n");
                     procesadoresUtilizables.remove(procesadoresUtilizables.size()-1);
+                    j++;
                 }
             }
         }
@@ -148,10 +151,9 @@ public class Planificador {
     
     public String printProcsEnCPU(){
         String res = "";
-        int i = 0;
         for (CPU cpu : procesadoresExistentes){
             if(cpu.getProcesoEnCPU() != null){
-                res += "CPU "+ i +": "+ cpu.getProcesoEnCPU().getNombre()+":"+cpu.getProcesoEnCPU().getID() + "-";
+                res += "CPU "+ cpu.getID() +": "+ cpu.getProcesoEnCPU().getNombre()+":"+cpu.getProcesoEnCPU().getID() + " - ";
             }
         }
         return res;
