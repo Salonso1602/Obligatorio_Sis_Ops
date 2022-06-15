@@ -61,7 +61,7 @@ public class AdminProcBloqueados {
     public String printListaConMotivo(){
         String result = "";
         for (Proceso proc : procesosBloqueados){
-            result += proc.getID() + ":" + proc.getEstadoActual().toString() + ", ";
+            result += proc.getNombre() + "("+proc.getID()+")" + ":" + proc.getEstadoActual().toString() + ", ";
         }
         if(result.length() > 3){
             return result.substring(0, result.length()-2);

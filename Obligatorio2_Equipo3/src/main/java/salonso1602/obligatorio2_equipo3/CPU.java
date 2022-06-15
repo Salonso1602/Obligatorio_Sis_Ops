@@ -10,9 +10,13 @@ package salonso1602.obligatorio2_equipo3;
  */
 public class CPU {
     private Proceso procesoCargado;
+    public boolean pideCambio;
+    private int id;
     
-    public CPU(){
+    public CPU(int id){
         procesoCargado = null;
+        pideCambio = false;
+        this.id = id;
     }
     
     public void ejecutarProceso(int quantum){
@@ -20,11 +24,12 @@ public class CPU {
             for(int i = 0; i < quantum; i++){
                 procesoCargado.addTiempoEjecutado(1);
                 if (procesoCargado.updateEstadoActual() != Proceso.Estados.Listo){
-                    this.procesoCargado = null;
+                        procesoCargado = null;
+                    pideCambio = true;
                     return;
                 }
             }
-            this.procesoCargado = null;
+            pideCambio = true;
         }
     }
     
@@ -33,5 +38,11 @@ public class CPU {
     }
     public void setProcesoEnCPU(Proceso otroProceso){
         this.procesoCargado = otroProceso;
+        pideCambio = false;
     }
+    
+    public String getID(){
+        return ""+id;
+    }
+    
 }

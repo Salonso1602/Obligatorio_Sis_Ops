@@ -76,6 +76,26 @@ public class Proceso {
         }
     }
     
+    public String getData(){
+        String res = "";
+        res += "Nombre: " + getNombre() + "\n";
+        res += "ID: " + getID()+ "\n";
+        res += "Estado: " + getEstadoActual().toString()+ "\n";
+        res += "Nivel de Prioridad: " + getPrioridad()+ "\n";
+        res += "Tiempo Ejecución: " + getTiempoEjecutado() + "/" + getTiempoEjecucion() + "\n";
+        res += "Periodo de Interrupción: " + getPeriodoES()+ "\n";
+        res += "Largo de Interrupción: " + getLargoES()+ "\n";
+        
+        if (UserOrSO){
+            res += "Es de nivel: SO\n";
+        }
+        else{
+            res += "Es de nivel: USER\n";
+        }
+        
+        return res;
+    }
+    
     public Estados getEstadoActual(){
             return estadoActual;
     }
