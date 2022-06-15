@@ -4,6 +4,8 @@
  */
 package salonso1602.obligatorio2_equipo3;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Néstor
@@ -88,9 +90,20 @@ public class Setup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Programa programa = new Programa(Integer.parseInt(Cant_CPUs.getText()),Integer.parseInt(Quantum_CPUs.getText()));
-        programa.setVisible(true);
-        this.setVisible(false);
+        if(Integer.parseInt(Cant_CPUs.getText()) <=0)
+        {
+            JOptionPane.showMessageDialog(null, "La cantidad de CPU a crearse debe ser mayor o igual a 1", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(Integer.parseInt(Quantum_CPUs.getText())<=0)
+        {
+            JOptionPane.showMessageDialog(null, "La cantidad de Quantum a asignar a la CPU debe ser mayor o igual a 1", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            Programa programa = new Programa(Integer.parseInt(Cant_CPUs.getText()),Integer.parseInt(Quantum_CPUs.getText()));
+            programa.setVisible(true);
+            this.setVisible(false);
+        } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
