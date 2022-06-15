@@ -137,9 +137,25 @@ public class Proceso {
     public void setEstadoActual(Estados estado){
         this.estadoActual = estado;
     }
+    
     public void setPrioridad(int prioridadNueva){
-        this.prioridad = prioridadNueva;
+        if(UserOrSO)
+        {
+           prioridad = prioridadNueva; 
+        }
+        else
+        {
+            if(prioridadNueva>49)
+            {
+                prioridad = prioridadNueva;
+            }
+            else
+            {
+               prioridad = prioridadNueva +50; 
+            }    
+        }
     }
+    
     public void setTiempoEjecucion(int tiempoNuevo){
         this.tiempoEjecucion = tiempoNuevo;
     }
