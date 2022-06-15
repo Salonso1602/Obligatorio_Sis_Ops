@@ -46,8 +46,15 @@ public class Planificador {
             logger.append("------------\n");
             logger.append("Ronda " + numRonda + ":\n");
             pasarAEjecutables();
-            pasarBloqueadosAListos();
-
+            LinkedList<Proceso>[] nuevosProcs = pasarBloqueadosAListos();
+            for (LinkedList<Proceso> cola : nuevosProcs){
+                if (!cola.isEmpty()){
+                for (Proceso proc : cola){
+                    logger.append(proc.getID() + " se desbloqueó\n");
+                }
+                }
+            }
+            
             for (CPU cpu : procesadoresExistentes) {
                 Proceso procEnCPU = cpu.getProcesoEnCPU();
                 cpu.ejecutarProceso(quantum);
@@ -72,13 +79,15 @@ public class Planificador {
         }
     }
 
-    public void pasarBloqueadosAListos() {
+    public LinkedList<Proceso>[] pasarBloqueadosAListos()
+    {
         LinkedList<Proceso>[] desbloqueados = Bloqueados.getDesbloqueados(quantum);
         int i = 0;
         for (LinkedList<Proceso> procesos : desbloqueados) {
             listaListos[i].addAll(procesos);
             i++;
         }
+        return desbloqueados;
     }
 
     public void agregarProcesoAListos(Proceso proceso) {
@@ -95,17 +104,20 @@ public class Planificador {
         if (procesadoresUtilizables.isEmpty()) {
             return;
         }
-        int j = 0;
-        for (int i = 0; i < 99; i++) {
-            for (Proceso proceso : listaListos[i]) {
-                if (procesadoresUtilizables.isEmpty()) {
+        for(int i = 0; i < 99;i++)
+        {
+            for(Proceso proceso : listaListos[i])
+            {
+                if(procesadoresUtilizables.isEmpty())
+                {
                     return;
-                } else {
-                    CPU cpu = procesadoresUtilizables.get(procesadoresUtilizables.size() - 1);
-                    cpu.setProcesoEnCPU(proceso);
-                    logger.append("Pase " + proceso.getID() + " a CPU" + cpu.getID() + "\n");
-                    procesadoresUtilizables.remove(procesadoresUtilizables.size() - 1);
-                    j++;
+                }
+                else
+                {
+                    CPU cpu = procesadoresUtilizables.get(procesadoresUtilizables.size()-1);
+                            cpu.setProcesoEnCPU(proceso);
+                    logger.append("Pase "+proceso.getID()+" a CPU"+cpu.getID()+"\n");
+                    procesadoresUtilizables.remove(procesadoresUtilizables.size()-1);
                 }
             }
         }
