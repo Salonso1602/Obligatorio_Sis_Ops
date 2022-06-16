@@ -30,14 +30,12 @@ public class Planificador {
         logger = new StringBuilder();
         numRonda = 0;
     }
-    
-    public int getQuantum()
-    {
+
+    public int getQuantum() {
         return this.quantum;
     }
-    
-    public void setQuantum(int nuevoQuantum)
-    {
+
+    public void setQuantum(int nuevoQuantum) {
         this.quantum = nuevoQuantum;
     }
 
@@ -47,14 +45,7 @@ public class Planificador {
             logger.append("Ronda " + numRonda + ":\n");
             pasarAEjecutables();
             LinkedList<Proceso>[] nuevosProcs = pasarBloqueadosAListos();
-            for (LinkedList<Proceso> cola : nuevosProcs){
-                if (!cola.isEmpty()){
-                for (Proceso proc : cola){
-                    logger.append(proc.getID() + " se desbloqueó\n");
-                }
-                }
-            }
-            
+
             for (CPU cpu : procesadoresExistentes) {
                 Proceso procEnCPU = cpu.getProcesoEnCPU();
                 cpu.ejecutarProceso(quantum);
@@ -63,8 +54,8 @@ public class Planificador {
                     if (estadoProc != Proceso.Estados.Listo) {
                         listaListos[procEnCPU.getPrioridad() - 1].remove(procEnCPU);
                     }
-                    if (estadoProc == Proceso.Estados.BloqueadoES ||
-                             estadoProc == Proceso.Estados.Bloqueado) {
+                    if (estadoProc == Proceso.Estados.BloqueadoES
+                            || estadoProc == Proceso.Estados.Bloqueado) {
                         Bloqueados.addBloqueado(procEnCPU);
                         logger.append(procEnCPU.getID() + " se bloqueó\n");
                     }
@@ -79,19 +70,34 @@ public class Planificador {
         }
     }
 
-    public LinkedList<Proceso>[] pasarBloqueadosAListos()
-    {
+    public LinkedList<Proceso>[] pasarBloqueadosAListos() {
         LinkedList<Proceso>[] desbloqueados = Bloqueados.getDesbloqueados(quantum);
         int i = 0;
         for (LinkedList<Proceso> procesos : desbloqueados) {
-            listaListos[i].addAll(procesos);
+            if (!procesos.isEmpty()) {
+                for (Proceso proc : procesos) {
+                    logger.append(proc.getID() + " se desbloqueó\n");
+                }
+                listaListos[i].addAll(procesos);
+            }
             i++;
+
         }
         return desbloqueados;
     }
 
     public void agregarProcesoAListos(Proceso proceso) {
         listaListos[proceso.getPrioridad() - 1].add(proceso);
+    }
+
+    public void updateProceso(Proceso proc) {
+        for (LinkedList<Proceso> cola : listaListos) {
+            if (cola.contains(proc)) {
+                cola.remove(proc);
+                break;
+            }
+        }
+        agregarProcesoAListos(proc);
     }
 
     public void pasarAEjecutables() {
@@ -104,27 +110,33 @@ public class Planificador {
         if (procesadoresUtilizables.isEmpty()) {
             return;
         }
-        for(int i = 0; i < 99;i++)
-        {
-            for(Proceso proceso : listaListos[i])
-            {
-                if(procesadoresUtilizables.isEmpty())
-                {
-                    return;
-                }
-                else
-                {
-                    CPU cpu = procesadoresUtilizables.get(procesadoresUtilizables.size()-1);
-                            cpu.setProcesoEnCPU(proceso);
-                    logger.append("Pase "+proceso.getID()+" a CPU"+cpu.getID()+"\n");
-                    procesadoresUtilizables.remove(procesadoresUtilizables.size()-1);
+
+        for (int i = 0; i < 99; i++) {
+            LinkedList<Proceso> bloqs = new LinkedList<>();
+            for (Proceso proceso : listaListos[i]) {
+                if (proceso.getEstadoActual() == Proceso.Estados.Listo) {
+                    while (!procesadoresUtilizables.isEmpty()) {
+                        CPU cpu = procesadoresUtilizables.get(procesadoresUtilizables.size() - 1);
+                        cpu.setProcesoEnCPU(proceso);
+                        logger.append("Pase " + proceso.getID() + " a CPU" + cpu.getID() + "\n");
+                        procesadoresUtilizables.remove(procesadoresUtilizables.size() - 1);
+                        continue;
+                    }
+                } else if (proceso.getEstadoActual() == Proceso.Estados.Bloqueado) {
+                    Bloqueados.addBloqueado(proceso);
+                    bloqs.add(proceso);
+                    logger.append(proceso.getID() + " está bloqueado\n");
                 }
             }
+            listaListos[i].removeAll(bloqs);
         }
     }
 
-    public String printBloqueados() {
+    public String printAllBloqueados() {
         return (this.Bloqueados.printListaConMotivo());
+    }
+    public String[] printBloqueadosUser() {
+        return (this.Bloqueados.listaBloqUser());
     }
 
     public String printListos() {
@@ -182,6 +194,11 @@ public class Planificador {
             }
         }
         return null;
+    }
+
+    public Proceso getProcEnBloq(String id) {
+        Proceso res = Bloqueados.getProc(id);
+        return res;
     }
 
     public Proceso getProc(String id) {

@@ -76,12 +76,11 @@ public class Programa extends javax.swing.JFrame {
         Label_Bloqueo_CPU = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
         Bloqueo_Colas = new javax.swing.JList<>();
-        Label_Bloqueo_ProcABloquear = new javax.swing.JLabel();
-        Bloqueo_BloquearProcesoText = new javax.swing.JTextField();
         Bloqueo_BloquearProceso = new javax.swing.JButton();
-        Label_Bloqueo_ProcABloquear1 = new javax.swing.JLabel();
-        Bloqueo_DesbloquearProcesoText = new javax.swing.JTextField();
         Bloqueo_DesbloquearProceso = new javax.swing.JButton();
+        Label_Bloqueo_Procesos1 = new javax.swing.JLabel();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        desbloqueables = new javax.swing.JList<>();
         Setup_Modificar_Frame = new javax.swing.JFrame();
         Volver_Modificar = new javax.swing.JButton();
         IrAModificarQuantum_Boton = new javax.swing.JButton();
@@ -110,9 +109,7 @@ public class Programa extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         dispProcCPU = new javax.swing.JTextArea();
         Modificar_Prioridad_Frame = new javax.swing.JFrame();
-        ModificarProceso_Label = new javax.swing.JLabel();
         Label_ModificarProceso_Bloqueados = new javax.swing.JLabel();
-        ModificarProceso_TextID = new javax.swing.JTextField();
         jScrollPane10 = new javax.swing.JScrollPane();
         ModificarProcesos_Procesos = new javax.swing.JList<>();
         ModificarProceso_Boton = new javax.swing.JButton();
@@ -141,8 +138,10 @@ public class Programa extends javax.swing.JFrame {
 
         Agregar_Frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Agregar_Frame.setTitle("Agregar Proceso");
+        Agregar_Frame.setMinimumSize(new java.awt.Dimension(800, 600));
         Agregar_Frame.setName("Agregar_Frame"); // NOI18N
-        Agregar_Frame.setSize(new java.awt.Dimension(600, 400));
+        Agregar_Frame.setPreferredSize(new java.awt.Dimension(800, 800));
+        Agregar_Frame.setSize(Display_Frame.getPreferredSize());
 
         Volver_Agregar.setText("Volver");
         Volver_Agregar.setActionCommand("");
@@ -256,9 +255,10 @@ public class Programa extends javax.swing.JFrame {
 
         Bloquear_Frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Bloquear_Frame.setTitle("Bloquear Proceso");
+        Bloquear_Frame.setMinimumSize(new java.awt.Dimension(800, 600));
         Bloquear_Frame.setName("Bloquear_Frame"); // NOI18N
-        Bloquear_Frame.setPreferredSize(new java.awt.Dimension(800, 550));
-        Bloquear_Frame.setSize(Bloquear_Frame.getPreferredSize());
+        Bloquear_Frame.setPreferredSize(new java.awt.Dimension(800, 800));
+        Bloquear_Frame.setSize(Display_Frame.getPreferredSize());
 
         Bloqueo_Volver.setText("Volver");
         Bloqueo_Volver.setActionCommand("");
@@ -294,16 +294,12 @@ public class Programa extends javax.swing.JFrame {
 
         jScrollPane9.setViewportView(Bloqueo_Colas);
 
-        Label_Bloqueo_ProcABloquear.setText("Ingrese la ID del proceso a bloquear");
-
         Bloqueo_BloquearProceso.setText("Bloquear");
         Bloqueo_BloquearProceso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Bloqueo_BloquearProcesoActionPerformed(evt);
             }
         });
-
-        Label_Bloqueo_ProcABloquear1.setText("Ingrese la ID del proceso a desbloquear");
 
         Bloqueo_DesbloquearProceso.setText("Desbloquear");
         Bloqueo_DesbloquearProceso.addActionListener(new java.awt.event.ActionListener() {
@@ -312,59 +308,45 @@ public class Programa extends javax.swing.JFrame {
             }
         });
 
+        Label_Bloqueo_Procesos1.setText("Procesos Desbloqueables");
+
+        jScrollPane14.setViewportView(desbloqueables);
+
         javax.swing.GroupLayout Bloquear_FrameLayout = new javax.swing.GroupLayout(Bloquear_Frame.getContentPane());
         Bloquear_Frame.getContentPane().setLayout(Bloquear_FrameLayout);
         Bloquear_FrameLayout.setHorizontalGroup(
             Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Bloquear_FrameLayout.createSequentialGroup()
-                .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Bloquear_FrameLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Bloquear_FrameLayout.createSequentialGroup()
-                                .addComponent(Bloqueo_BloquearProceso, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(366, 366, 366)
-                                .addComponent(Bloqueo_DesbloquearProceso, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Bloquear_FrameLayout.createSequentialGroup()
-                                .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Label_Bloqueo_ProcABloquear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Bloqueo_BloquearProcesoText, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(358, 358, 358)
-                                .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Label_Bloqueo_ProcABloquear1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Bloqueo_DesbloquearProcesoText, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(Bloquear_FrameLayout.createSequentialGroup()
-                        .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Bloquear_FrameLayout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Bloquear_FrameLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(Label_Bloqueo_Colas)))
-                        .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Bloquear_FrameLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Bloquear_FrameLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(Label_Bloqueo_Procesos)))
-                        .addGap(39, 39, 39)
-                        .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Bloqueo_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane7)
-                                .addComponent(jScrollPane8)
-                                .addGroup(Bloquear_FrameLayout.createSequentialGroup()
-                                    .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(Label_Bloqueo_CPU)
-                                        .addComponent(Label_Bloqueo_Bloqueados))
-                                    .addGap(0, 0, Short.MAX_VALUE))))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Label_Bloqueo_Colas)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Label_Bloqueo_Procesos)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(Bloqueo_BloquearProceso, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(Bloqueo_DesbloquearProceso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Label_Bloqueo_Procesos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(Bloqueo_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Label_Bloqueo_CPU)
+                    .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Label_Bloqueo_Bloqueados, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         Bloquear_FrameLayout.setVerticalGroup(
             Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Bloquear_FrameLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Bloquear_FrameLayout.createSequentialGroup()
                         .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -373,38 +355,33 @@ public class Programa extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-                            .addComponent(jScrollPane6)))
+                            .addComponent(jScrollPane6)
+                            .addComponent(jScrollPane14))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Bloqueo_DesbloquearProceso)
+                            .addComponent(Bloqueo_BloquearProceso))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Bloqueo_Volver))
                     .addGroup(Bloquear_FrameLayout.createSequentialGroup()
-                        .addComponent(Label_Bloqueo_CPU)
+                        .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Label_Bloqueo_CPU)
+                            .addComponent(Label_Bloqueo_Procesos1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(Label_Bloqueo_Bloqueados)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(Bloquear_FrameLayout.createSequentialGroup()
-                        .addComponent(Label_Bloqueo_ProcABloquear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Bloqueo_BloquearProcesoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Bloquear_FrameLayout.createSequentialGroup()
-                        .addComponent(Label_Bloqueo_ProcABloquear1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Bloqueo_DesbloquearProcesoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(Bloqueo_Volver)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(Bloquear_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Bloqueo_BloquearProceso)
-                    .addComponent(Bloqueo_DesbloquearProceso))
-                .addGap(18, 18, 18))
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)))
+                .addContainerGap(287, Short.MAX_VALUE))
         );
 
         Setup_Modificar_Frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Setup_Modificar_Frame.setTitle("Modificar Proceso");
+        Setup_Modificar_Frame.setMinimumSize(new java.awt.Dimension(800, 600));
         Setup_Modificar_Frame.setName("Setup_Modificar_Frame"); // NOI18N
-        Setup_Modificar_Frame.setSize(new java.awt.Dimension(400, 300));
+        Setup_Modificar_Frame.setPreferredSize(new java.awt.Dimension(800, 800));
+        Setup_Modificar_Frame.setSize(Display_Frame.getPreferredSize());
 
         Volver_Modificar.setText("Volver");
         Volver_Modificar.setActionCommand("");
@@ -435,33 +412,30 @@ public class Programa extends javax.swing.JFrame {
         Setup_Modificar_FrameLayout.setHorizontalGroup(
             Setup_Modificar_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Setup_Modificar_FrameLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(214, Short.MAX_VALUE)
                 .addGroup(Setup_Modificar_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Setup_Modificar_FrameLayout.createSequentialGroup()
-                        .addComponent(IrAModificarPrioridad_Boton, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(Setup_Modificar_FrameLayout.createSequentialGroup()
-                        .addGroup(Setup_Modificar_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(IrAModificarQuantum_Boton, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Volver_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(IrAModificarPrioridad_Boton, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IrAModificarQuantum_Boton, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Volver_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
         Setup_Modificar_FrameLayout.setVerticalGroup(
             Setup_Modificar_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Setup_Modificar_FrameLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap(339, Short.MAX_VALUE)
                 .addComponent(IrAModificarPrioridad_Boton)
                 .addGap(18, 18, 18)
                 .addComponent(IrAModificarQuantum_Boton)
                 .addGap(18, 18, 18)
                 .addComponent(Volver_Modificar)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
 
         Display_Frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Display_Frame.setTitle("Display de Procesos");
+        Display_Frame.setMinimumSize(new java.awt.Dimension(800, 600));
         Display_Frame.setName("marcoDisp"); // NOI18N
-        Display_Frame.setPreferredSize(new java.awt.Dimension(800, 550));
+        Display_Frame.setPreferredSize(new java.awt.Dimension(800, 800));
         Display_Frame.setSize(Display_Frame.getPreferredSize());
         Display_Frame.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -560,22 +534,22 @@ public class Programa extends javax.swing.JFrame {
                                     .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(Display_FrameLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                        .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(Display_FrameLayout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(6, 6, 6)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel1))
                         .addGap(27, 27, 27)
                         .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jLabel2))
                         .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(Display_FrameLayout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(getFullCola))
-                            .addGroup(Display_FrameLayout.createSequentialGroup()
                                 .addGap(67, 67, 67)
-                                .addComponent(getProcData))))
+                                .addComponent(getProcData))
+                            .addGroup(Display_FrameLayout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addComponent(getFullCola))))
                     .addGroup(Display_FrameLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel6)))
@@ -594,31 +568,36 @@ public class Programa extends javax.swing.JFrame {
         Display_FrameLayout.setVerticalGroup(
             Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Display_FrameLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
                 .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Display_FrameLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(27, 27, 27)
-                        .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(getProcData))
-                        .addGap(9, 9, 9)
-                        .addComponent(cantQuantums, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botStart)
-                            .addComponent(getFullCola))
                         .addGap(16, 16, 16)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Display_FrameLayout.createSequentialGroup()
-                        .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(Display_FrameLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(27, 27, 27)
+                                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(getProcData))
+                                .addGap(9, 9, 9)
+                                .addComponent(cantQuantums, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(botStart)
+                                    .addComponent(getFullCola))
+                                .addGap(16, 16, 16)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Display_FrameLayout.createSequentialGroup()
+                                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(6, 6, 6)
+                                .addGroup(Display_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Volver_Display))
+                    .addGroup(Display_FrameLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -626,14 +605,13 @@ public class Programa extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
-                .addComponent(Volver_Display)
-                .addGap(16, 16, 16))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Modificar_Prioridad_Frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        ModificarProceso_Label.setText("Ingrese la ID del proceso a modificar");
+        Modificar_Prioridad_Frame.setMinimumSize(new java.awt.Dimension(800, 600));
+        Modificar_Prioridad_Frame.setPreferredSize(new java.awt.Dimension(800, 800));
+        Modificar_Prioridad_Frame.setSize(Display_Frame.getPreferredSize());
 
         Label_ModificarProceso_Bloqueados.setText("Procesos Bloqueados");
 
@@ -676,7 +654,13 @@ public class Programa extends javax.swing.JFrame {
 
         Label_ModificarProceso_Procesos.setText("Procesos en Cola");
 
-        jLabel12.setText("Prioridad del Proceso:");
+        jLabel12.setText("Nueva prioridad del Proceso:");
+
+        ModificarProceso_PrioridadText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarProceso_PrioridadTextActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Modificar_Prioridad_FrameLayout = new javax.swing.GroupLayout(Modificar_Prioridad_Frame.getContentPane());
         Modificar_Prioridad_Frame.getContentPane().setLayout(Modificar_Prioridad_FrameLayout);
@@ -697,35 +681,31 @@ public class Programa extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Modificar_Prioridad_FrameLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Modificar_Prioridad_FrameLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ModificarProceso_Boton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Modificar_Prioridad_FrameLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ModificarProceso_PrioridadText, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(117, 117, 117)))
                 .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Modificar_Prioridad_FrameLayout.createSequentialGroup()
                         .addComponent(Label_ModificarProceso_Bloqueados)
-                        .addContainerGap())
-                    .addGroup(Modificar_Prioridad_FrameLayout.createSequentialGroup()
-                        .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Label_ModificarProceso_CPU)
-                                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Modificar_Prioridad_FrameLayout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(ModificarProceso_Label))
-                            .addGroup(Modificar_Prioridad_FrameLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ModificarProceso_Boton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ModificarProceso_Volver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(Modificar_Prioridad_FrameLayout.createSequentialGroup()
-                                        .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(Modificar_Prioridad_FrameLayout.createSequentialGroup()
-                                                .addComponent(jLabel12)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(ModificarProceso_PrioridadText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(ModificarProceso_TextID, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap())))))
+                            .addComponent(Label_ModificarProceso_CPU)
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(97, 97, 97))
+            .addGroup(Modificar_Prioridad_FrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ModificarProceso_Volver, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                .addContainerGap())
         );
         Modificar_Prioridad_FrameLayout.setVerticalGroup(
             Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -734,39 +714,37 @@ public class Programa extends javax.swing.JFrame {
                 .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Modificar_Prioridad_FrameLayout.createSequentialGroup()
                         .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Label_ModificarProceso_CPU)
-                            .addComponent(ModificarProceso_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
-                        .addGap(9, 9, 9)
-                        .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(Modificar_Prioridad_FrameLayout.createSequentialGroup()
-                                .addComponent(ModificarProceso_TextID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(ModificarProceso_PrioridadText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(36, 36, 36)
-                        .addComponent(Label_ModificarProceso_Bloqueados)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(Modificar_Prioridad_FrameLayout.createSequentialGroup()
-                                .addComponent(ModificarProceso_Boton)
-                                .addGap(18, 18, 18)
-                                .addComponent(ModificarProceso_Volver))
-                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(Modificar_Prioridad_FrameLayout.createSequentialGroup()
-                        .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Label_ModificarProceso_Colas)
                             .addComponent(Label_ModificarProceso_Procesos))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                             .addComponent(jScrollPane10))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Modificar_Prioridad_FrameLayout.createSequentialGroup()
+                        .addComponent(Label_ModificarProceso_CPU)
+                        .addGap(34, 34, 34)
+                        .addGroup(Modificar_Prioridad_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(Modificar_Prioridad_FrameLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(18, 18, 18)
+                                .addComponent(ModificarProceso_PrioridadText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(ModificarProceso_Boton)))
+                        .addGap(36, 36, 36)
+                        .addComponent(Label_ModificarProceso_Bloqueados)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addComponent(ModificarProceso_Volver)
+                .addGap(361, 361, 361))
         );
 
         Modificar_Quantum_Frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        Modificar_Quantum_Frame.setMinimumSize(new java.awt.Dimension(800, 600));
+        Modificar_Quantum_Frame.setPreferredSize(new java.awt.Dimension(800, 800));
+        Modificar_Quantum_Frame.setSize(Display_Frame.getPreferredSize());
 
         Label_Quantum_CPUs.setText("Quantum:");
 
@@ -789,20 +767,20 @@ public class Programa extends javax.swing.JFrame {
         Modificar_Quantum_FrameLayout.setHorizontalGroup(
             Modificar_Quantum_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Modificar_Quantum_FrameLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(Modificar_Quantum_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(ModificarQuantum_Volver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ModificarQuantum_Boton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Modificar_Quantum_FrameLayout.createSequentialGroup()
                         .addComponent(Label_Quantum_CPUs)
                         .addGap(18, 18, 18)
-                        .addComponent(ModificarQuantum_Text, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)))
-                .addGap(13, 13, 13))
+                        .addComponent(ModificarQuantum_Text, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         Modificar_Quantum_FrameLayout.setVerticalGroup(
             Modificar_Quantum_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Modificar_Quantum_FrameLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap(165, Short.MAX_VALUE)
                 .addGroup(Modificar_Quantum_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Label_Quantum_CPUs)
                     .addComponent(ModificarQuantum_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -810,13 +788,15 @@ public class Programa extends javax.swing.JFrame {
                 .addComponent(ModificarQuantum_Boton)
                 .addGap(18, 18, 18)
                 .addComponent(ModificarQuantum_Volver)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Obligatorio SO Equipo 6");
+        setMinimumSize(new java.awt.Dimension(800, 600));
         setName("Ejecutable"); // NOI18N
-        setSize(new java.awt.Dimension(400, 300));
+        setPreferredSize(new java.awt.Dimension(800, 800));
+        setSize(Display_Frame.getPreferredSize());
 
         Agregar_Proceso.setText("Agregar Procesos");
         Agregar_Proceso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -859,19 +839,19 @@ public class Programa extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(117, 117, 117)
+                .addContainerGap(279, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Agregar_Proceso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Bloquear_Proceso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Modificar_Proceso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Display_Todo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
-                .addGap(146, 146, 146))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap(259, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addGap(81, 81, 81)
                 .addComponent(Agregar_Proceso)
@@ -881,7 +861,7 @@ public class Programa extends javax.swing.JFrame {
                 .addComponent(Modificar_Proceso)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Display_Todo)
-                .addGap(216, 216, 216))
+                .addContainerGap(333, Short.MAX_VALUE))
         );
 
         pack();
@@ -897,6 +877,10 @@ public class Programa extends javax.swing.JFrame {
         this.setVisible(false);
         
         Bloqueo_Colas.setModel(new DefaultComboBoxModel<String>(planificador.printListaPrioridades()));
+        Bloqueo_Procesos.setModel(new DefaultComboBoxModel<String>(new String[0]));
+        desbloqueables.setModel(new DefaultComboBoxModel<String>(planificador.printBloqueadosUser()));
+        Bloqueo_ProcBloq.setText(planificador.printAllBloqueados());
+        Bloqueo_EnCPU.setText(planificador.printProcsEnCPU());
 
         Bloqueo_Colas.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -910,7 +894,7 @@ public class Programa extends javax.swing.JFrame {
                 }
             }
         });
-        dispProcBloq.setText(planificador.printBloqueados());
+        dispProcBloq.setText(planificador.printAllBloqueados());
         dispProcCPU.setText(planificador.printProcsEnCPU());
     }//GEN-LAST:event_Bloquear_ProcesoActionPerformed
 
@@ -953,6 +937,7 @@ public class Programa extends javax.swing.JFrame {
         Display_Frame.setVisible(true);
 
         listaColas.setModel(new DefaultComboBoxModel<String>(planificador.printListaPrioridades()));
+        listaProcs.setModel(new DefaultComboBoxModel<>());
 
         listaColas.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -991,7 +976,7 @@ public class Programa extends javax.swing.JFrame {
     private void botStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botStartActionPerformed
         int repes = Integer.parseInt(cantQuantums.getText());
         planificador.ejecutarRonda(repes);
-        dispProcBloq.setText(planificador.printBloqueados());
+        dispProcBloq.setText(planificador.printAllBloqueados());
         dispProcCPU.setText(planificador.printProcsEnCPU());
 
         txtLog.setText(planificador.getLog());
@@ -1017,6 +1002,7 @@ public class Programa extends javax.swing.JFrame {
         Modificar_Prioridad_Frame.setVisible(true);
         
         ModificarProcesos_Colas.setModel(new DefaultComboBoxModel<String>(planificador.printListaPrioridades()));
+        ModificarProcesos_Procesos.setModel(new DefaultComboBoxModel<String>());
 
         ModificarProcesos_Colas.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -1030,12 +1016,12 @@ public class Programa extends javax.swing.JFrame {
                 }
             }
         });
-        ModificarProcesos_ProcesosBloqueados.setText(planificador.printBloqueados());
+        ModificarProcesos_ProcesosBloqueados.setText(planificador.printAllBloqueados());
         ModificarProcesos_EnCPU.setText(planificador.printProcsEnCPU());
     }//GEN-LAST:event_IrAModificarPrioridad_BotonActionPerformed
 
     private void Bloqueo_BloquearProcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bloqueo_BloquearProcesoActionPerformed
-        String IDaBloquear = Bloqueo_BloquearProcesoText.getText();
+        String IDaBloquear = Bloqueo_Procesos.getSelectedValue().split(":")[1];
         Proceso procesoABloquear = planificador.getProc(IDaBloquear);
         if(procesoABloquear == null)
         {
@@ -1043,20 +1029,24 @@ public class Programa extends javax.swing.JFrame {
         }
         else
         {
-            procesoABloquear.BloquearProceso();   
+            procesoABloquear.BloquearProceso();
+            JOptionPane.showMessageDialog(null, "El proceso se bloqueará en la próxima ronda", "Done", JOptionPane.OK_OPTION);
+            Bloqueo_ProcBloq.setText(planificador.printAllBloqueados());
         }
     }//GEN-LAST:event_Bloqueo_BloquearProcesoActionPerformed
 
     private void Bloqueo_DesbloquearProcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bloqueo_DesbloquearProcesoActionPerformed
-        String IDaDesbloquear = Bloqueo_DesbloquearProcesoText.getText();
-        Proceso procesoADesbloquear = planificador.getProc(IDaDesbloquear);
+        String IDaDesbloquear = desbloqueables.getSelectedValue().split(":")[1];
+        Proceso procesoADesbloquear = planificador.getProcEnBloq(IDaDesbloquear);
         if(procesoADesbloquear == null)
         {
             JOptionPane.showMessageDialog(null, "No se encontró el proceso que indicaste, por favor, intentalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         else
         {
-            procesoADesbloquear.DesbloquearProceso();   
+            procesoADesbloquear.DesbloquearProceso();
+            JOptionPane.showMessageDialog(null, "El proceso se desbloqueará en la próxima ronda", "Done", JOptionPane.OK_OPTION);
+            Bloqueo_ProcBloq.setText(planificador.printAllBloqueados());
         }
     }//GEN-LAST:event_Bloqueo_DesbloquearProcesoActionPerformed
 
@@ -1077,8 +1067,17 @@ public class Programa extends javax.swing.JFrame {
         Setup_Modificar_Frame.setVisible(true);
     }//GEN-LAST:event_ModificarQuantum_VolverActionPerformed
 
+    private void ModificarProceso_PrioridadTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarProceso_PrioridadTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ModificarProceso_PrioridadTextActionPerformed
+
+    private void ModificarProceso_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarProceso_VolverActionPerformed
+        Modificar_Prioridad_Frame.setVisible(false);
+        Setup_Modificar_Frame.setVisible(true);
+    }//GEN-LAST:event_ModificarProceso_VolverActionPerformed
+
     private void ModificarProceso_BotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarProceso_BotonActionPerformed
-        String IDaModificar = ModificarProceso_TextID.getText();
+        String IDaModificar = ModificarProcesos_Procesos.getSelectedValue().split(":")[1];
         Proceso procesoAModificar = planificador.getProc(IDaModificar);
         if(procesoAModificar == null)
         {
@@ -1086,6 +1085,7 @@ public class Programa extends javax.swing.JFrame {
         }
         else
         {
+            ModificarProcesos_Procesos.setModel(new DefaultComboBoxModel<>());
             if(Integer.parseInt(ModificarProceso_PrioridadText.getText())<=0)
             {
                 JOptionPane.showMessageDialog(null, "La cantidad de Prioridad a asignar a un Proceso debe ser mayor o igual a 1", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1097,15 +1097,11 @@ public class Programa extends javax.swing.JFrame {
             else
             {
                 procesoAModificar.setPrioridad(Integer.parseInt(ModificarProceso_PrioridadText.getText()));
+                planificador.updateProceso(procesoAModificar);
                 JOptionPane.showMessageDialog(null, "Proceso modificado correctamente", "Modificación Exitosa", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_ModificarProceso_BotonActionPerformed
-
-    private void ModificarProceso_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarProceso_VolverActionPerformed
-        Modificar_Prioridad_Frame.setVisible(false);
-        Setup_Modificar_Frame.setVisible(true);
-    }//GEN-LAST:event_ModificarProceso_VolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1149,10 +1145,8 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JFrame Bloquear_Frame;
     private javax.swing.JButton Bloquear_Proceso;
     private javax.swing.JButton Bloqueo_BloquearProceso;
-    private javax.swing.JTextField Bloqueo_BloquearProcesoText;
     private javax.swing.JList<String> Bloqueo_Colas;
     private javax.swing.JButton Bloqueo_DesbloquearProceso;
-    private javax.swing.JTextField Bloqueo_DesbloquearProcesoText;
     private javax.swing.JTextArea Bloqueo_EnCPU;
     private javax.swing.JTextArea Bloqueo_ProcBloq;
     private javax.swing.JList<String> Bloqueo_Procesos;
@@ -1169,9 +1163,8 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JLabel Label_Bloqueo_Bloqueados;
     private javax.swing.JLabel Label_Bloqueo_CPU;
     private javax.swing.JLabel Label_Bloqueo_Colas;
-    private javax.swing.JLabel Label_Bloqueo_ProcABloquear;
-    private javax.swing.JLabel Label_Bloqueo_ProcABloquear1;
     private javax.swing.JLabel Label_Bloqueo_Procesos;
+    private javax.swing.JLabel Label_Bloqueo_Procesos1;
     private javax.swing.JLabel Label_ModificarProceso_Bloqueados;
     private javax.swing.JLabel Label_ModificarProceso_CPU;
     private javax.swing.JLabel Label_ModificarProceso_Colas;
@@ -1184,9 +1177,7 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JLabel Label_Tiempo_ES;
     private javax.swing.JLabel Label_Tiempo_Total;
     private javax.swing.JButton ModificarProceso_Boton;
-    private javax.swing.JLabel ModificarProceso_Label;
     private javax.swing.JTextField ModificarProceso_PrioridadText;
-    private javax.swing.JTextField ModificarProceso_TextID;
     private javax.swing.JButton ModificarProceso_Volver;
     private javax.swing.JList<String> ModificarProcesos_Colas;
     private javax.swing.JTextArea ModificarProcesos_EnCPU;
@@ -1209,6 +1200,7 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JButton Volver_Modificar;
     private javax.swing.JButton botStart;
     private javax.swing.JTextField cantQuantums;
+    private javax.swing.JList<String> desbloqueables;
     private javax.swing.JTextArea dispProcBloq;
     private javax.swing.JTextArea dispProcCPU;
     private javax.swing.JButton getFullCola;
@@ -1226,6 +1218,7 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;

@@ -4,6 +4,7 @@
  */
 package salonso1602.obligatorio2_equipo3;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -49,6 +50,11 @@ public class AdminProcBloqueados {
                         result[proc.getPrioridad()-1].add(proc);
                         aux.add(proc);
                     }
+                } else{
+                    if (proc.getEstadoActual() != Proceso.Estados.Bloqueado){
+                        result[proc.getPrioridad()-1].add(proc);
+                        aux.add(proc);
+                    }
                 }
             }
         }
@@ -56,6 +62,15 @@ public class AdminProcBloqueados {
             procesosBloqueados.remove(proc);
         }
         return result;
+    }
+    
+    public Proceso getProc(String id){
+        for(Proceso proc : procesosBloqueados){
+            if (proc.getID().equals(id)){
+                return proc;
+            }
+        }
+        return null;
     }
     
     public String printListaConMotivo(){
@@ -67,5 +82,15 @@ public class AdminProcBloqueados {
             return result.substring(0, result.length()-2);
         }
         return "";
+    }
+    
+    public String[] listaBloqUser(){
+        ArrayList<String> res = new ArrayList<>();
+        for (Proceso proc : procesosBloqueados){
+            if(proc.getEstadoActual() == Proceso.Estados.Bloqueado){
+                res.add(proc.getNombre()+":"+proc.getID());
+            }
+        }
+        return res.toArray(new String[0]);
     }
 }
