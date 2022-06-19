@@ -52,6 +52,7 @@ public class Planificador {
                 if (procEnCPU != null) {
                     Proceso.Estados estadoProc = procEnCPU.getEstadoActual();
                     if (estadoProc != Proceso.Estados.Listo) {
+                        logger.append(procEnCPU.getID() + " finalizó\n");
                         listaListos[procEnCPU.getPrioridad() - 1].remove(procEnCPU);
                     }
                     if (estadoProc == Proceso.Estados.BloqueadoES
