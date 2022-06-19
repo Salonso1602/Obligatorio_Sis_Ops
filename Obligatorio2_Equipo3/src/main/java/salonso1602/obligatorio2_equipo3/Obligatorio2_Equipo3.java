@@ -12,7 +12,7 @@ package salonso1602.obligatorio2_equipo3;
 public class Obligatorio2_Equipo3 {
 
     public static void main(String[] args) {
-        Planificador planner = SingletonPlanificador.getInstance(new Planificador(1,3)).value;
+        Planificador planner = new Planificador(1,3);
         Proceso p1 = new Proceso("p1", 1, 55, 5, 10,"p1",true);
         Proceso p2 = new Proceso("p2", 1, 9, 6, 20,"p2",true);
         Proceso p3 = new Proceso("p3", 77, 184, 0, 0,"p3",false);
