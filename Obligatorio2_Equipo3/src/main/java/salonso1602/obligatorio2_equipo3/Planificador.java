@@ -121,6 +121,7 @@ public class Planificador {
                         cpu.setProcesoEnCPU(proceso);
                         logger.append("Pase " + proceso.getID() + " a CPU" + cpu.getID() + "\n");
                         procesadoresUtilizables.remove(procesadoresUtilizables.size() - 1);
+                        bloqs.add(proceso);
                         break;
                     }
                 } else if (proceso.getEstadoActual() == Proceso.Estados.Bloqueado) {
