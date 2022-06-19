@@ -51,7 +51,7 @@ public class Planificador {
                 cpu.ejecutarProceso(quantum);
                 if (procEnCPU != null) {
                     Proceso.Estados estadoProc = procEnCPU.getEstadoActual();
-                    if (estadoProc != Proceso.Estados.Listo) {
+                    if (estadoProc == Proceso.Estados.Finalizado) {
                         logger.append(procEnCPU.getID() + " finalizó\n");
                         listaListos[procEnCPU.getPrioridad() - 1].remove(procEnCPU);
                     }
