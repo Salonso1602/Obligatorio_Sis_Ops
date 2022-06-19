@@ -46,7 +46,7 @@ public class AdminProcBloqueados {
             for (Proceso proc : procesosBloqueados){
                 if (proc.getEstadoActual() == Proceso.Estados.BloqueadoES){
                     proc.addTiempoEnES(1);
-                    if (proc.updateEstadoActual() != Proceso.Estados.BloqueadoES){
+                    if (!aux.contains(proc) && proc.updateEstadoActual() != Proceso.Estados.BloqueadoES){
                         result[proc.getPrioridad()-1].add(proc);
                         aux.add(proc);
                     }
