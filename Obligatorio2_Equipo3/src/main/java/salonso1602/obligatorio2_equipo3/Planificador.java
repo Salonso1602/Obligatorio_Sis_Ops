@@ -54,13 +54,11 @@ public class Planificador {
                     if (estadoProc == Proceso.Estados.Finalizado) {
                         logger.append(procEnCPU.getID() + " finalizó\n");
                         listaListos[procEnCPU.getPrioridad() - 1].remove(procEnCPU);
-                    }
-                    if (estadoProc == Proceso.Estados.BloqueadoES
+                    } else if (estadoProc == Proceso.Estados.BloqueadoES
                             || estadoProc == Proceso.Estados.Bloqueado) {
                         Bloqueados.addBloqueado(procEnCPU);
                         logger.append(procEnCPU.getID() + " se bloqueó\n");
-                    }
-                    if (estadoProc == Proceso.Estados.Listo) {
+                    }else if (estadoProc == Proceso.Estados.Listo) {
                         listaListos[procEnCPU.getPrioridad() - 1].remove(procEnCPU);
                         listaListos[procEnCPU.getPrioridad() - 1].addLast(procEnCPU);
                     }
@@ -77,7 +75,9 @@ public class Planificador {
         for (LinkedList<Proceso> procesos : desbloqueados) {
             if (!procesos.isEmpty()) {
                 for (Proceso proc : procesos) {
-                    logger.append(proc.getID() + " se desbloqueó\n");
+                    if (proc.getEstadoActual() == Proceso.Estados.Listo) {
+                        logger.append(proc.getID() + " se desbloqueó\n");
+                    }
                 }
                 listaListos[i].addAll(procesos);
             }
@@ -136,6 +136,7 @@ public class Planificador {
     public String printAllBloqueados() {
         return (this.Bloqueados.printListaConMotivo());
     }
+
     public String[] printBloqueadosUser() {
         return (this.Bloqueados.listaBloqUser());
     }
